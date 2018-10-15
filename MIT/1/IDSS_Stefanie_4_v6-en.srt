@@ -1,0 +1,340 @@
+0
+00:00:00,810 --> 00:00:05,330
+So far, in our data, each data point was described by a set of features.
+
+1
+00:00:05,330 --> 00:00:07,810
+Now, we no longer have that luxury.
+
+2
+00:00:07,810 --> 00:00:09,330
+Take a social network.
+
+3
+00:00:09,330 --> 00:00:13,330
+We may know nothing about the people in there, so we have no feature vectors.
+
+4
+00:00:13,330 --> 00:00:17,010
+But we know who talks to whom, that is, who is connected.
+
+5
+00:00:17,010 --> 00:00:20,990
+In the Internet, two websites are connected, if one links to the other.
+
+6
+00:00:20,990 --> 00:00:24,130
+Then there are biological networks, computer networks, and
+
+7
+00:00:24,130 --> 00:00:26,110
+data represented as networks, such as images.
+
+8
+00:00:27,290 --> 00:00:30,870
+So our data is given as a network or a graph.
+
+9
+00:00:30,870 --> 00:00:35,300
+Each data point, for example, a person in a social network, is a node in the graph.
+
+10
+00:00:35,300 --> 00:00:37,210
+The connections are edges.
+
+11
+00:00:37,210 --> 00:00:41,650
+We can draw this on paper by drawing dots for nodes and and lines for edges.
+
+12
+00:00:41,650 --> 00:00:43,350
+We may have weights on the edges.
+
+13
+00:00:43,350 --> 00:00:44,940
+The larger the weight of an edge,
+
+14
+00:00:44,940 --> 00:00:47,240
+the stronger is the connection between the two nodes.
+
+15
+00:00:47,240 --> 00:00:50,110
+While small graphs on paper may still be easy to get,
+
+16
+00:00:50,110 --> 00:00:53,920
+making sense of a huge social or biological network is much harder.
+
+17
+00:00:53,920 --> 00:00:57,680
+The first thing to understand may be the community structure of the network.
+
+18
+00:00:57,680 --> 00:01:00,540
+Are there dense groups of friends for example?
+
+19
+00:01:00,540 --> 00:01:04,275
+We may also want to partition other networks into well connected groups.
+
+20
+00:01:04,275 --> 00:01:06,660
+We lot from cluster analysis and the graph.
+
+21
+00:01:06,660 --> 00:01:11,740
+In social networks, the cluster structure affects how epidemics spread.
+
+22
+00:01:11,740 --> 00:01:14,340
+Cluster analysis of dynamic social networks
+
+23
+00:01:14,340 --> 00:01:17,490
+teaches us about the formation of friends and opinions.
+
+24
+00:01:17,490 --> 00:01:21,880
+In Biology, clusters of proteins can be indicative of functionality.
+
+25
+00:01:21,880 --> 00:01:26,000
+And in science clusters of coauthor networks indicate research topics.
+
+26
+00:01:26,000 --> 00:01:27,215
+There's a lot of other examples.
+
+27
+00:01:27,215 --> 00:01:32,230
+In fact, we'll see that we can even use graphs to cluster data that is
+
+28
+00:01:32,230 --> 00:01:36,960
+given as feature vectors and even in cases for key means fails, this happens for
+
+29
+00:01:36,960 --> 00:01:40,290
+example if the data forms some sheets or curls.
+
+30
+00:01:40,290 --> 00:01:43,280
+Let's try to make this a bit more formal, what is a cluster in a graph?
+
+31
+00:01:44,330 --> 00:01:46,560
+There are in fact many definitions, but
+
+32
+00:01:46,560 --> 00:01:49,370
+many of them share some intuitive criteria.
+
+33
+00:01:49,370 --> 00:01:51,040
+Let's have a look at those.
+
+34
+00:01:51,040 --> 00:01:55,620
+Intuitively, a cluster consists of points that are well connected with each other.
+
+35
+00:01:55,620 --> 00:01:57,900
+That is, there are lots of edges between them.
+
+36
+00:01:57,900 --> 00:02:01,460
+The number of edges within a cluster is also called the volume.
+
+37
+00:02:01,460 --> 00:02:03,900
+The volume per node is the density.
+
+38
+00:02:03,900 --> 00:02:07,180
+We want this to be large, that's the first criteria.
+
+39
+00:02:07,180 --> 00:02:11,020
+Second, between different clusters there should not be many edges.
+
+40
+00:02:11,020 --> 00:02:12,710
+After all if there were many edges,
+
+41
+00:02:12,710 --> 00:02:14,710
+why would you not declare this a single cluster?
+
+42
+00:02:14,710 --> 00:02:17,490
+This separation of clusters is measured by the cut value.
+
+43
+00:02:18,610 --> 00:02:21,420
+If we wanted to cut out the cluster from the graph, we would
+
+44
+00:02:21,420 --> 00:02:25,300
+need to disconnect the edges that connect the cluster with the rest of the graph.
+
+45
+00:02:25,300 --> 00:02:29,600
+The cut value is the number of edges we need to cut or their rates.
+
+46
+00:02:29,600 --> 00:02:33,500
+So we could just find a group of nodes with a low cut value.
+
+47
+00:02:33,500 --> 00:02:35,200
+Is this a good criterion?
+
+48
+00:02:35,200 --> 00:02:37,960
+Certainly, most clusters have a low cut value.
+
+49
+00:02:37,960 --> 00:02:41,510
+But there are clusters that have an even smaller cut.
+
+50
+00:02:41,510 --> 00:02:44,860
+Look at this outline node, it has only one edge so
+
+51
+00:02:44,860 --> 00:02:48,080
+it's cut value is one, that's super low.
+
+52
+00:02:48,080 --> 00:02:51,010
+And hence, by our definition, makes a good cluster.
+
+53
+00:02:51,010 --> 00:02:53,400
+Maybe that's not exactly what we were aiming for.
+
+54
+00:02:53,400 --> 00:02:55,300
+Instead combining cut and
+
+55
+00:02:55,300 --> 00:03:00,060
+volume strikes a balance between the size of the clusters and their separation.
+
+56
+00:03:00,060 --> 00:03:04,810
+Popular examples of such combined criteria are conductance and normalized cut.
+
+57
+00:03:04,810 --> 00:03:06,990
+Both divide the cut by a measure of volume.
+
+58
+00:03:06,990 --> 00:03:08,890
+We want to minimize this criteria.
+
+59
+00:03:08,890 --> 00:03:12,990
+If the cluster is small or has small volume then the denominator is small and
+
+60
+00:03:12,990 --> 00:03:14,370
+the criterion is large.
+
+61
+00:03:14,370 --> 00:03:16,660
+If the cluster is large then the other cluster,
+
+62
+00:03:16,660 --> 00:03:18,970
+that is the remaining nodes, is small.
+
+63
+00:03:18,970 --> 00:03:23,855
+By this measure, good clusters are not too small, internally well connected and
+
+64
+00:03:23,855 --> 00:03:25,630
+separated from the rest of the nodes.
+
+65
+00:03:25,630 --> 00:03:29,400
+Clusters can also be seen in the so called adjacency matrix.
+
+66
+00:03:29,400 --> 00:03:32,780
+We can construct a matrix that has a row and a column for each node.
+
+67
+00:03:32,780 --> 00:03:37,210
+The entry n row I and column J is one, if there is an edge between row I and
+
+68
+00:03:37,210 --> 00:03:38,890
+J, and its there otherwise.
+
+69
+00:03:39,930 --> 00:03:41,940
+If your other nodes, or rows and
+
+70
+00:03:41,940 --> 00:03:44,729
+columns by cluster, then the matrix has a block structure.
+
+71
+00:03:45,890 --> 00:03:50,350
+Typically we do not know the clusters, and the nodes are shuffled arbitrarily.
+
+72
+00:03:50,350 --> 00:03:53,070
+So the structure is hidden in what looks like chaos.
+
+73
+00:03:53,070 --> 00:03:55,040
+There are many other flavors of clustering.
+
+74
+00:03:55,040 --> 00:03:58,770
+For example, modularity measure indicates how high the density of
+
+75
+00:03:58,770 --> 00:04:03,110
+edges is within groups, compared to a baseline graph where edges occur randomly.
+
+76
+00:04:03,110 --> 00:04:04,210
+Or, sometimes,
+
+77
+00:04:04,210 --> 00:04:08,340
+if the graph is massive, we are only interested in very local clusters.
+
+78
+00:04:08,340 --> 00:04:11,600
+For such local clustering, we don't need to look at the entire graph.
+
+79
+00:04:11,600 --> 00:04:16,050
+Finally, in correlation clustering, we have information for pairs of points.
+
+80
+00:04:16,050 --> 00:04:19,160
+If they are similar, they should be in the same cluster.
+
+81
+00:04:19,160 --> 00:04:22,380
+If they should be separated, we draw a negative edge between them.
+
+82
+00:04:22,380 --> 00:04:26,400
+We then cluster points to respect as many of these given relationships as possible.
+
+83
+00:04:26,400 --> 00:04:30,390
+Here, we'll continue with the goal of finding dense, well separated clusters.
+
+84
+00:04:30,390 --> 00:04:32,223
+Next, we'll see how to do it.
+

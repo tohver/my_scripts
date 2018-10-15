@@ -1,0 +1,396 @@
+0
+00:00:00,725 --> 00:00:03,330
+We'll start out by looking at the linear regression problem at
+
+1
+00:00:03,330 --> 00:00:04,770
+the population level.
+
+2
+00:00:04,770 --> 00:00:07,780
+This means that we have access to infinite amounts of data, and
+
+3
+00:00:07,780 --> 00:00:11,620
+therefore we can compute theoretical expected value of population averages such
+
+4
+00:00:11,620 --> 00:00:14,650
+as expected value, or expected value of Y times X.
+
+5
+00:00:14,650 --> 00:00:16,320
+Later for estimation purposes,
+
+6
+00:00:16,320 --> 00:00:20,130
+we will have to work with a finer sample of observations drawn from the population.
+
+7
+00:00:20,130 --> 00:00:23,765
+But right now we focus on the population case to define the ideal quantities.
+
+8
+00:00:23,765 --> 00:00:26,100
+We shall try to construct the best linear prediction rule for
+
+9
+00:00:26,100 --> 00:00:29,400
+Y using a vector of X, with components denoted by Xj.
+
+10
+00:00:29,400 --> 00:00:33,160
+Specifically given such X, our predicted value of Y will be beta prime X,
+
+11
+00:00:33,160 --> 00:00:37,380
+which is defined as the sum of beta js times Xjs.
+
+12
+00:00:37,380 --> 00:00:40,355
+Here the primary vector beta consists of components beta js, and
+
+13
+00:00:40,355 --> 00:00:43,500
+we commonly call this parameter the Regression Parameter.
+
+14
+00:00:43,500 --> 00:00:46,830
+We define beta as any solution to the Best Linear Prediction problem,
+
+15
+00:00:46,830 --> 00:00:49,560
+abbreviated as BLP in the population.
+
+16
+00:00:49,560 --> 00:00:54,540
+Here we minimize the expected or mean squared error that results from
+
+17
+00:00:54,540 --> 00:00:59,330
+predicting Y, using linear rule given by b prime X.
+
+18
+00:00:59,330 --> 00:01:03,200
+Where b denotes a potential value for the parameter vector beta.
+
+19
+00:01:03,200 --> 00:01:08,010
+The solution, beta prime X, is called the Best Linear Predictor of Y using X.
+
+20
+00:01:08,010 --> 00:01:11,585
+In words, this solution is the best linear prediction rule among
+
+21
+00:01:11,585 --> 00:01:13,625
+all the possible linear prediction rules.
+
+22
+00:01:13,625 --> 00:01:17,594
+Next we can compute an optimal beta by solving the first order conditions of
+
+23
+00:01:17,594 --> 00:01:20,177
+the BLP problem, called the Normal Equations,
+
+24
+00:01:20,177 --> 00:01:23,570
+where we have expected value of (Y- beta prime X) = 0.
+
+25
+00:01:23,570 --> 00:01:26,813
+Here we are setting to 0 the derivative of the objective function with respect to b
+
+26
+00:01:26,813 --> 00:01:28,020
+that will minimize.
+
+27
+00:01:28,020 --> 00:01:31,040
+Any optimal value of b satisfies the normal equations, and
+
+28
+00:01:31,040 --> 00:01:33,900
+hence we can set beta to be any solution.
+
+29
+00:01:33,900 --> 00:01:36,730
+Under some conditions such solution will be unique, but
+
+30
+00:01:36,730 --> 00:01:38,900
+we don't require this in our analysis.
+
+31
+00:01:38,900 --> 00:01:43,507
+Next, if we define the Regression Error as epsilon = (Y- beta X), then
+
+32
+00:01:43,507 --> 00:01:49,180
+the normal equations in the population become expectation of epsilon times X = 0.
+
+33
+00:01:49,180 --> 00:01:53,130
+This immediately gives us the decomposition Y = beta X + epsilon,
+
+34
+00:01:53,130 --> 00:01:55,520
+where epsilon is uncorrelated to X.
+
+35
+00:01:55,520 --> 00:01:58,800
+Thus beta prime X is the predicted or explained part of Y, and
+
+36
+00:01:58,800 --> 00:02:01,310
+epsilon is the residual or unexplained part.
+
+37
+00:02:01,310 --> 00:02:03,656
+In practice, we don't have access to the population data.
+
+38
+00:02:03,656 --> 00:02:06,805
+Instead we observe a sample of observations of size n,
+
+39
+00:02:06,805 --> 00:02:12,480
+where observations are denoted by Yi and Xi, and i runs from 1 to n.
+
+40
+00:02:12,480 --> 00:02:15,600
+We assume that observations are generated as a random sample,
+
+41
+00:02:15,600 --> 00:02:19,850
+from a distribution F, which is the population distribution of R, Y, and X.
+
+42
+00:02:19,850 --> 00:02:23,305
+Formally this means that the observations are obtained as realizations of
+
+43
+00:02:23,305 --> 00:02:27,360
+independently and identically distributed copies of the random vector Y, X.
+
+44
+00:02:27,360 --> 00:02:31,040
+We next construct the best linear prediction rule in sample for Y using X.
+
+45
+00:02:31,040 --> 00:02:35,700
+Specifically, given X, our predicated value of Y will be hat beta prime X,
+
+46
+00:02:35,700 --> 00:02:38,650
+which is the sum of hat beta js times Xjs.
+
+47
+00:02:38,650 --> 00:02:42,970
+Here hat beta is a vector with components denoted by hat beta js.
+
+48
+00:02:42,970 --> 00:02:46,510
+We call these components the Sample Regression Coefficients.
+
+49
+00:02:46,510 --> 00:02:49,450
+Next we define the linear regression in the sample by
+
+50
+00:02:49,450 --> 00:02:51,080
+analogy to the population problem.
+
+51
+00:02:51,080 --> 00:02:54,900
+Specifically we define hat beta as any solution to the best linear prediction
+
+52
+00:02:54,900 --> 00:02:56,060
+problem in the sample.
+
+53
+00:02:56,060 --> 00:02:58,989
+Where we minimize the sample mean squared error for
+
+54
+00:02:58,989 --> 00:03:01,586
+predicting Y using the linear rule b prime X.
+
+55
+00:03:01,586 --> 00:03:05,038
+Here we denote the sample mean, or empirical expectation,
+
+56
+00:03:05,038 --> 00:03:08,935
+by the symbol E sub n, which simply is the sample average notation.
+
+57
+00:03:08,935 --> 00:03:12,911
+In words, the empirical expectation is simply the sample analog of the population
+
+58
+00:03:12,911 --> 00:03:14,040
+expectation.
+
+59
+00:03:14,040 --> 00:03:17,930
+We can compute an optimal beta hat by solving the sample normal equations,
+
+60
+00:03:17,930 --> 00:03:23,920
+where we set the empirical expectation of Xi(Yi- beta hat prime Xi) = 0.
+
+61
+00:03:23,920 --> 00:03:27,530
+These equations are the First Order Conditions of the Best Linear Predictor
+
+62
+00:03:27,530 --> 00:03:28,640
+problem in the sample.
+
+63
+00:03:28,640 --> 00:03:32,882
+By defining the In-Sample Regression Error, hat epsilon, as (Yi- hat beta
+
+64
+00:03:32,882 --> 00:03:36,800
+prime Xi), we obtained the decomposition of Yi into sum of two parts.
+
+65
+00:03:36,800 --> 00:03:40,510
+Part one, given by hat beta prime Xi, represents the predicted or
+
+66
+00:03:40,510 --> 00:03:41,730
+explained part of Yi.
+
+67
+00:03:41,730 --> 00:03:45,009
+Part two, given by hat epsilon i, represents the residual or
+
+68
+00:03:45,009 --> 00:03:46,770
+unexplained part of Yi.
+
+69
+00:03:46,770 --> 00:03:49,620
+Next we examine the quality of prediction that the sample linear
+
+70
+00:03:49,620 --> 00:03:50,480
+regression provides.
+
+71
+00:03:50,480 --> 00:03:53,510
+We know that the best linear predictor of our sample is beta X.
+
+72
+00:03:53,510 --> 00:03:57,490
+So the question really is, does the sample best linear predictor hat beta X
+
+73
+00:03:57,490 --> 00:04:00,560
+adequately approximate the best linear predictor beta X?
+
+74
+00:04:00,560 --> 00:04:01,960
+So let's think about it.
+
+75
+00:04:01,960 --> 00:04:04,400
+Sample linear regression estimates P parameters,
+
+76
+00:04:04,400 --> 00:04:08,180
+beta 1 through beta p, without imposing any restrictions on these parameters.
+
+77
+00:04:08,180 --> 00:04:11,100
+And so intuitively, to estimate each of these parameters,
+
+78
+00:04:11,100 --> 00:04:14,330
+we will need many observations per each such parameter.
+
+79
+00:04:14,330 --> 00:04:19,500
+This means that the ratio of N / P must be large, or P / N must be small.
+
+80
+00:04:19,500 --> 00:04:23,760
+This intuition is indeed supported by the following theoretical result, which reads.
+
+81
+00:04:23,760 --> 00:04:28,273
+Under regularity conditions, the root of the expected square difference between
+
+82
+00:04:28,273 --> 00:04:32,849
+the best linear predictor, and the sample best linear predictor, is bounded above
+
+83
+00:04:32,849 --> 00:04:37,610
+by a constant, times the level of noise, times square root of the dimension p / n.
+
+84
+00:04:37,610 --> 00:04:39,910
+Here we are averaging over values of X, and
+
+85
+00:04:39,910 --> 00:04:43,490
+the bound holds with probability close to 1 for large enough sample sizes.
+
+86
+00:04:43,490 --> 00:04:46,720
+The bound mainly reflects the estimation error in hat beta,
+
+87
+00:04:46,720 --> 00:04:49,190
+since we are averaging over the values of X.
+
+88
+00:04:49,190 --> 00:04:52,800
+In other words, if n is large and p is much smaller than n, for
+
+89
+00:04:52,800 --> 00:04:54,640
+nearly all realizations of the sample,
+
+90
+00:04:54,640 --> 00:04:58,320
+the sample linear regression gets really close to the population linear regression.
+
+91
+00:04:59,580 --> 00:05:00,770
+So let us summarize.
+
+92
+00:05:00,770 --> 00:05:04,830
+First, we define linear regression in the population and in the sample through
+
+93
+00:05:04,830 --> 00:05:08,990
+the best linear prediction problems solved in the population and in the sample.
+
+94
+00:05:08,990 --> 00:05:11,900
+Second, we argued that the sample linear regression, or
+
+95
+00:05:11,900 --> 00:05:15,680
+best linear predictor, approximates the population linear regression, or
+
+96
+00:05:15,680 --> 00:05:20,180
+best linear predictor in the population very well when the ratio p / n is small.
+
+97
+00:05:20,180 --> 00:05:23,010
+In the next segment we will discuss the assessment of prediction
+
+98
+00:05:23,010 --> 00:05:24,060
+performance in practice.
+

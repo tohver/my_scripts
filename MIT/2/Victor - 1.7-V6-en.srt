@@ -1,0 +1,252 @@
+0
+00:00:00,830 --> 00:00:03,850
+In this segment, we'll briefly discuss other types of regression.
+
+1
+00:00:03,850 --> 00:00:07,370
+First, we will introduce regressions introduced by using nonlinear
+
+2
+00:00:07,370 --> 00:00:09,606
+functional forms, for example logistic regression.
+
+3
+00:00:09,606 --> 00:00:12,950
+Second, we will mention regressions that result from replacing
+
+4
+00:00:12,950 --> 00:00:15,670
+the squared loss function by other loss functions.
+
+5
+00:00:15,670 --> 00:00:19,750
+For example, using the absolute deviation loss gives rise to median regression, and
+
+6
+00:00:19,750 --> 00:00:23,960
+using the estimatric absolute deviation laws gives rise to quantile regression.
+
+7
+00:00:23,960 --> 00:00:28,720
+In contrast to linear regression, in nonlinear regression we use a nonlinear
+
+8
+00:00:28,720 --> 00:00:34,110
+function of parameters and regressors, say P of X and beta to predict Y.
+
+9
+00:00:34,110 --> 00:00:37,090
+For instance, the logistic regression employs the logistic transformation of
+
+10
+00:00:37,090 --> 00:00:40,098
+beta X given by the formula that you see.
+
+11
+00:00:40,098 --> 00:00:42,925
+This logistic transformation is particularly attractive when the response
+
+12
+00:00:42,925 --> 00:00:46,035
+variable, Y, is binary taking on values of zero or one so
+
+13
+00:00:46,035 --> 00:00:49,735
+that the predicted values are naturally constrained between zero and one.
+
+14
+00:00:49,735 --> 00:00:54,047
+The problem of predicting binary Y is a basic example of a classification problem.
+
+15
+00:00:54,047 --> 00:00:57,307
+We can interpret the predicted values in this case as approximating
+
+16
+00:00:57,307 --> 00:00:58,757
+probability that Y=1.
+
+17
+00:00:58,757 --> 00:01:00,367
+In nonlinear aggression,
+
+18
+00:01:00,367 --> 00:01:03,907
+we estimate the parameters by solving the sample nonlinear least squares problem.
+
+19
+00:01:03,907 --> 00:01:09,558
+Where we minimized the average squared error for predicting Yi by p(Xi, b).
+
+20
+00:01:09,558 --> 00:01:13,148
+In the case of binary outcomes, we often estimate the parameters by maximizing
+
+21
+00:01:13,148 --> 00:01:14,898
+the logistic log-likelihood function for
+
+22
+00:01:14,898 --> 00:01:19,800
+the binary outcomes Yi conditional on Xi as you see in this formula.
+
+23
+00:01:19,800 --> 00:01:24,590
+We previously used the squared error loss to set up the best linear predictor.
+
+24
+00:01:24,590 --> 00:01:28,060
+Sometimes we call this approach the linear mean regression, because the best
+
+25
+00:01:28,060 --> 00:01:32,320
+predictor of Y under squared loss is the conditional mean of Y given X.
+
+26
+00:01:32,320 --> 00:01:35,110
+So what if we use the absolute deviation loss instead?
+
+27
+00:01:35,110 --> 00:01:37,870
+Then we obtain the least absolute deviation regression or
+
+28
+00:01:37,870 --> 00:01:40,670
+median regression, because the best predictor of Y
+
+29
+00:01:40,670 --> 00:01:44,780
+under absolute deviation loss is the median value of Y conditional on X.
+
+30
+00:01:44,780 --> 00:01:49,120
+We define the linear median regression by solving the best linear prediction problem
+
+31
+00:01:49,120 --> 00:01:50,580
+under the absolute deviation loss.
+
+32
+00:01:50,580 --> 00:01:53,616
+Where in the population we use the theoretical expectation and
+
+33
+00:01:53,616 --> 00:01:56,630
+in the sample we use the empirical expectation instead.
+
+34
+00:01:56,630 --> 00:02:00,010
+Just like mean regression, median regression can also be made nonlinear
+
+35
+00:02:00,010 --> 00:02:04,150
+by replacing beta X with some nonlinear function p ( X, b ).
+
+36
+00:02:04,150 --> 00:02:07,390
+Regarding the motivation, median regressions are especially great for
+
+37
+00:02:07,390 --> 00:02:10,570
+cases when the outcomes have heavy tails or outliers.
+
+38
+00:02:10,570 --> 00:02:13,190
+The median regressions have much better properties in this case than
+
+39
+00:02:13,190 --> 00:02:14,160
+the mean regressions.
+
+40
+00:02:14,160 --> 00:02:17,340
+If we use an asymmetric absolute deviation loss, then we end up
+
+41
+00:02:17,340 --> 00:02:20,730
+with the asymmetric absolute deviation regression, or quantile regression.
+
+42
+00:02:20,730 --> 00:02:24,400
+Specifically we define the linear Tao quantile regression by solving the best
+
+43
+00:02:24,400 --> 00:02:27,690
+linear prediction problem under the asymmetric absolute deviation loss.
+
+44
+00:02:27,690 --> 00:02:30,050
+In the population we use the population expectation and
+
+45
+00:02:30,050 --> 00:02:32,750
+in the sample we use the empirical expectation instead.
+
+46
+00:02:32,750 --> 00:02:36,193
+The weight Tao that appears in the definition of the absolute deviation loss
+
+47
+00:02:36,193 --> 00:02:40,012
+specifies that Tao times 100-th percentile of Y given that we are trying to model
+
+48
+00:02:40,012 --> 00:02:40,820
+linearly.
+
+49
+00:02:40,820 --> 00:02:42,310
+Quantile regressions are great for
+
+50
+00:02:42,310 --> 00:02:45,240
+determining the factors that affect the outcomes in the tails.
+
+51
+00:02:45,240 --> 00:02:47,050
+For example, in risk management,
+
+52
+00:02:47,050 --> 00:02:50,700
+we might predict the extremal conditional percentiles of Y using the information X.
+
+53
+00:02:50,700 --> 00:02:53,610
+This type of prediction is called the conditional value-at-risk analysis.
+
+54
+00:02:53,610 --> 00:02:56,080
+In medicine, we could be interested in how smoking and
+
+55
+00:02:56,080 --> 00:03:00,380
+other controllable factors X affect very low percentiles of infant birth weights Y.
+
+56
+00:03:00,380 --> 00:03:04,000
+In supply chain management, we could try to predict the inventory level for
+
+57
+00:03:04,000 --> 00:03:08,070
+a product that is able to meet the 90-th percentile of demand Y
+
+58
+00:03:08,070 --> 00:03:10,230
+given the economic conditions described by X.
+
+59
+00:03:11,460 --> 00:03:14,760
+In this segment, we have briefly overviewed non-linear regressions
+
+60
+00:03:14,760 --> 00:03:16,970
+as well as quantile regressions and their uses.
+
+61
+00:03:16,970 --> 00:03:20,280
+In the next block of our module, we will consider modern linear and
+
+62
+00:03:20,280 --> 00:03:23,010
+nonlinear regressions which are motivated by high-dimensional data.
+

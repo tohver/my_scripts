@@ -1,0 +1,552 @@
+0
+00:00:01,470 --> 00:00:05,690
+We begin a new block of our module devoted modern nonlinear regression.
+
+1
+00:00:05,690 --> 00:00:09,870
+Here we are interested in predicting the outcome y using the raw regressor Zed
+
+2
+00:00:09,870 --> 00:00:11,090
+which are k-dimensional.
+
+3
+00:00:11,090 --> 00:00:15,010
+Recall that the best prediction rule g(Z) is the conditional expectation of y
+
+4
+00:00:15,010 --> 00:00:15,800
+given Z.
+
+5
+00:00:15,800 --> 00:00:19,955
+In this module so far, we have used best linear prediction rules to approximate
+
+6
+00:00:19,955 --> 00:00:24,230
+g(Z) and linear regression or lost regression for estimation.
+
+7
+00:00:24,230 --> 00:00:27,690
+Now we consider nonlinear prediction rules to approximate g(Z),
+
+8
+00:00:27,690 --> 00:00:30,410
+including tree-based methods and neural networks.
+
+9
+00:00:30,410 --> 00:00:33,340
+In this segment we discussed tree-based methods.
+
+10
+00:00:33,340 --> 00:00:36,590
+The idea of regression trees is to partition the regressor space where Z
+
+11
+00:00:36,590 --> 00:00:38,670
+takes values into a set of rectangles, and
+
+12
+00:00:38,670 --> 00:00:41,030
+then for each rectangle provide a predicted value.
+
+13
+00:00:41,030 --> 00:00:45,870
+Suppose we have n observations, Zi, Yi for i ranging from 1 to n.
+
+14
+00:00:45,870 --> 00:00:48,610
+Given the partition of the space into M rectangles,
+
+15
+00:00:48,610 --> 00:00:51,220
+R1 through Rm, which will be determined by data.
+
+16
+00:00:51,220 --> 00:00:53,970
+The regression rule is a prediction of the four.
+
+17
+00:00:53,970 --> 00:00:57,570
+Hat g(Z) is equal to the sum over m from 1 to
+
+18
+00:00:57,570 --> 00:01:01,580
+m of hat beta m times the indicator that Z belongs to the rectangle Rm.
+
+19
+00:01:01,580 --> 00:01:05,810
+The estimated coefficients are obtained by minimizing the sample MSE,
+
+20
+00:01:05,810 --> 00:01:07,510
+as shown in this formula.
+
+21
+00:01:07,510 --> 00:01:12,420
+From the formula we can conclude that hat Beta m is set equal to average of Yi
+
+22
+00:01:12,420 --> 00:01:17,240
+with Zi falling in the rectangle Rm, as shown in the formula that you see.
+
+23
+00:01:17,240 --> 00:01:20,100
+The rectangles or regions Rm are called nodes and
+
+24
+00:01:20,100 --> 00:01:23,655
+each nodes has predicted value had Rm associated with it.
+
+25
+00:01:23,655 --> 00:01:27,330
+And nice thing about regression trees is that you get to draw cool
+
+26
+00:01:27,330 --> 00:01:28,650
+pictures like this one.
+
+27
+00:01:28,650 --> 00:01:33,575
+Here we show a tree based prediction rule for our wage example where Y is wage and
+
+28
+00:01:33,575 --> 00:01:37,620
+Z are experience, geographic, and educational characteristics.
+
+29
+00:01:37,620 --> 00:01:41,570
+As you can see from looking at the terminal nodes of the tree, in this tree,
+
+30
+00:01:41,570 --> 00:01:44,560
+the predicted hourly wage for college graduates with
+
+31
+00:01:44,560 --> 00:01:48,540
+more than 9.5 years of experience is $24, and otherwise it is 17.
+
+32
+00:01:48,540 --> 00:01:51,880
+The predicted wage for non-college graduates with more than 14 years of
+
+33
+00:01:51,880 --> 00:01:54,330
+experience is 14, and otherwise it is 12.
+
+34
+00:01:54,330 --> 00:01:56,560
+Now how do we grow this tree?
+
+35
+00:01:56,560 --> 00:02:00,510
+To make computation tractable, we use the recursive binary partitioning or
+
+36
+00:02:00,510 --> 00:02:02,570
+splitting of the regressor space.
+
+37
+00:02:02,570 --> 00:02:07,120
+First, we cut that regressor space into two regions by choosing a regressor and
+
+38
+00:02:07,120 --> 00:02:10,850
+a split point that achieve the best improvement in the sample MSE.
+
+39
+00:02:10,850 --> 00:02:14,290
+This gives us the tree of depth one, that you see in the figure.
+
+40
+00:02:14,290 --> 00:02:18,710
+The best variable to split on here is the indicator of college degree and
+
+41
+00:02:18,710 --> 00:02:22,940
+it takes values of 0 or 1, so the natural split point is 0.5.
+
+42
+00:02:22,940 --> 00:02:25,870
+This gives us a starting tree-based prediction rule,
+
+43
+00:02:25,870 --> 00:02:31,030
+which predicts a $20 hourly wage for college graduates and 13 for all others.
+
+44
+00:02:31,030 --> 00:02:34,370
+Second we repeat this procedure over two resulting regions or
+
+45
+00:02:34,370 --> 00:02:37,220
+nodes, college graduates and non-college graduates,
+
+46
+00:02:37,220 --> 00:02:40,920
+obtaining in this step four new nodes that we see in this figure.
+
+47
+00:02:40,920 --> 00:02:44,880
+For college graduates the splitting rule that minimizes MSE
+
+48
+00:02:44,880 --> 00:02:47,530
+is the experience regressor at 9.5 years.
+
+49
+00:02:47,530 --> 00:02:49,340
+This refines the prediction rule for
+
+50
+00:02:49,340 --> 00:02:55,160
+graduates to $24 if experience is greater than 9.5 years and $12 otherwise.
+
+51
+00:02:55,160 --> 00:02:58,930
+For non-graduates the procedure works similarly.
+
+52
+00:02:58,930 --> 00:03:01,820
+Third, we repeat this procedure over each of the four nodes.
+
+53
+00:03:01,820 --> 00:03:04,090
+The tree of that three now has eight nodes.
+
+54
+00:03:04,090 --> 00:03:08,080
+We see that in the final level we are now splitting our gender indicator,
+
+55
+00:03:08,080 --> 00:03:10,840
+high school graduate indicator, and the south indicator.
+
+56
+00:03:10,840 --> 00:03:15,475
+Finally, we stop growing the tree when the desired depths of the tree is reached.
+
+57
+00:03:15,475 --> 00:03:17,845
+Or when the minimal number of observations per node,
+
+58
+00:03:17,845 --> 00:03:19,565
+called minimal node, size is reached.
+
+59
+00:03:19,565 --> 00:03:21,225
+We've now made several observations.
+
+60
+00:03:21,225 --> 00:03:23,045
+First, the deeper we grow the tree,
+
+61
+00:03:23,045 --> 00:03:26,245
+the better is our approximation to the regression function g(Z).
+
+62
+00:03:26,245 --> 00:03:28,345
+On the other hand, the deeper the tree,
+
+63
+00:03:28,345 --> 00:03:32,485
+the more noisy our estimate of g(Z) becomes, since there are fewer
+
+64
+00:03:32,485 --> 00:03:36,780
+observations per terminal node to estimate the predicted value for this node.
+
+65
+00:03:36,780 --> 00:03:40,200
+From a prediction point of view, we can try to find the right depth or
+
+66
+00:03:40,200 --> 00:03:42,780
+the right structure of the tree by cross-validation.
+
+67
+00:03:42,780 --> 00:03:47,155
+For example, in the wage example the tree of depth 2 performs better in terms of
+
+68
+00:03:47,155 --> 00:03:50,710
+cross-validated MSE than the trees of depths 3 or 1.
+
+69
+00:03:50,710 --> 00:03:53,370
+The process of cutting down the branches of the tree to improve
+
+70
+00:03:53,370 --> 00:03:55,800
+predictive performance is called Pruning The Tree.
+
+71
+00:03:55,800 --> 00:03:58,820
+However in practice pruning the tree often doesn't give
+
+72
+00:03:58,820 --> 00:04:01,800
+satisfactory performance because a single prune tree
+
+73
+00:04:01,800 --> 00:04:05,580
+provides a very crude approximation to the regression function g(Z).
+
+74
+00:04:05,580 --> 00:04:09,850
+A much more powerful and one use approach to improve simple regression trees
+
+75
+00:04:09,850 --> 00:04:11,590
+is to build the Random Forest.
+
+76
+00:04:11,590 --> 00:04:15,500
+The idea of Random Forest is to grow many different deep trees and
+
+77
+00:04:15,500 --> 00:04:17,530
+then average prediction rules based on them.
+
+78
+00:04:17,530 --> 00:04:20,680
+The trees are grown over different artificial data samples
+
+79
+00:04:20,680 --> 00:04:24,300
+generated by sampling randomly with replacement from the original data.
+
+80
+00:04:24,300 --> 00:04:27,970
+This way of creating artificial samples is called the bootstrap statistics.
+
+81
+00:04:27,970 --> 00:04:31,090
+The trees are growing deep to keep the approximation error low and
+
+82
+00:04:31,090 --> 00:04:34,780
+averaging is meant to reduce the noisiness of the individual trees.
+
+83
+00:04:34,780 --> 00:04:36,270
+Let us define the bootstrap method.
+
+84
+00:04:36,270 --> 00:04:39,866
+Each bootstrap sample is created by sampling from our data on pairs (Yi,
+
+85
+00:04:39,866 --> 00:04:44,510
+Zi) randomly with replacement, so some observations get drawn multiple times and
+
+86
+00:04:44,510 --> 00:04:46,450
+some don't get redrawn at all.
+
+87
+00:04:46,450 --> 00:04:49,230
+Given a bootstrap sample numbered by numbered by numeral b,
+
+88
+00:04:49,230 --> 00:04:52,210
+we build a tree-based prediction rule hat gb (Z).
+
+89
+00:04:52,210 --> 00:04:54,730
+We repeat the procedure capital B times in total and
+
+90
+00:04:54,730 --> 00:04:59,390
+then average the prediction rules, that result from each of the bootstrap samples.
+
+91
+00:04:59,390 --> 00:05:04,290
+So here we have hat g random forest (Z) equals 1 over B times the sum of
+
+92
+00:05:04,290 --> 00:05:08,930
+hat g sub B of Z over B, where b runs from one to capital B.
+
+93
+00:05:08,930 --> 00:05:11,130
+Using bootstrap here is an intuitive idea.
+
+94
+00:05:11,130 --> 00:05:13,700
+If we could have many independent copies of the data, we could
+
+95
+00:05:13,700 --> 00:05:17,470
+average the prediction rules obtained over these copies to reduce the noisiness.
+
+96
+00:05:17,470 --> 00:05:20,610
+Since we don't have such copies, we rely on bootstrap copies of the data.
+
+97
+00:05:20,610 --> 00:05:23,630
+The key underlying idea here is that the trees are grown deep to keep
+
+98
+00:05:23,630 --> 00:05:25,060
+the approximation error low and
+
+99
+00:05:25,060 --> 00:05:28,370
+averaging is meant to reduce the noisiness of the individual trees.
+
+100
+00:05:28,370 --> 00:05:31,290
+The procedure of averaging noisy prediction rules over the bootstrap
+
+101
+00:05:31,290 --> 00:05:33,810
+samples is called Bootstrap Aggregation or Bagging.
+
+102
+00:05:33,810 --> 00:05:37,660
+Finally I would like to know that what we discuss here is the simplest version
+
+103
+00:05:37,660 --> 00:05:40,276
+of the random forest, and there are many different modifications
+
+104
+00:05:40,276 --> 00:05:43,540
+aimed at improving predictive performance that we didn't discuss.
+
+105
+00:05:43,540 --> 00:05:46,264
+But I'm encouraging you to look at the course materials for
+
+106
+00:05:46,264 --> 00:05:49,630
+additional references that discuss random force and more detail.
+
+107
+00:05:49,630 --> 00:05:52,460
+Another approach to improve simple regression tree is by boosting.
+
+108
+00:05:52,460 --> 00:05:55,700
+The idea of boosting is that of request of fatigue where estimated tree-based
+
+109
+00:05:55,700 --> 00:05:58,668
+prediction rule, then we take the residuals and estimate another shallow
+
+110
+00:05:58,668 --> 00:06:01,640
+tree-based prediction rule for these residuals and so on.
+
+111
+00:06:01,640 --> 00:06:03,860
+Summing up the prediction rules for
+
+112
+00:06:03,860 --> 00:06:06,580
+the residuals gives us the prediction rule for the outcome.
+
+113
+00:06:06,580 --> 00:06:11,210
+Unlike in a random forest, we use shallow trees, rather than deep trees, to keep
+
+114
+00:06:11,210 --> 00:06:15,510
+the noise low and each step of boosting aims to reduce the approximation error.
+
+115
+00:06:15,510 --> 00:06:18,890
+In order to avoid overfitting and boosting, we can stop the procedure
+
+116
+00:06:18,890 --> 00:06:22,140
+once we don't improve the cross-validated mean square error.
+
+117
+00:06:22,140 --> 00:06:24,670
+Formerly, the boosting algorithm looks as follows.
+
+118
+00:06:24,670 --> 00:06:30,750
+In step 1, we initialize the residuals Ri = Yi, for i that runs from 1 to n.
+
+119
+00:06:30,750 --> 00:06:31,540
+In step 2,
+
+120
+00:06:31,540 --> 00:06:35,450
+we perform the following operation over index j running from 1 to capital J.
+
+121
+00:06:35,450 --> 00:06:38,463
+We fit a tree-based prediction rule,
+
+122
+00:06:38,463 --> 00:06:44,121
+gj(Z) to the data (Zi,Ri) with i from 1 to n and we have data residuals
+
+123
+00:06:44,121 --> 00:06:48,990
+as R1 equals previous Ri minus lambda times hat g sub j (Zi).
+
+124
+00:06:48,990 --> 00:06:52,320
+Finally in step 3, we output the boosted prediction rule.
+
+125
+00:06:52,320 --> 00:06:57,030
+Hat g(Z) equals sum over J of lambda hat g sub j(Z).
+
+126
+00:06:57,030 --> 00:07:01,100
+The capital J and lambda that you see here are the tuning parameters.
+
+127
+00:07:01,100 --> 00:07:05,160
+Representing the number of boosting steps, and the degree of updating the residuals.
+
+128
+00:07:05,160 --> 00:07:08,180
+In particular, lambda equals 1, gives us the full update.
+
+129
+00:07:08,180 --> 00:07:10,700
+We can choose j and lambda by cross validation.
+
+130
+00:07:10,700 --> 00:07:11,900
+So let us summarize.
+
+131
+00:07:11,900 --> 00:07:14,060
+We discussed the tree based prediction rules, and
+
+132
+00:07:14,060 --> 00:07:16,430
+ways to improve them by bagging or boosting.
+
+133
+00:07:16,430 --> 00:07:19,400
+Bagging is bootstrap aggregation of the prediction rules.
+
+134
+00:07:19,400 --> 00:07:23,190
+Bootstrap aggregation of deep regression trees gives us random forests.
+
+135
+00:07:23,190 --> 00:07:26,150
+Boosting uses recursive fitting of residuals by a sequence of tree-based
+
+136
+00:07:26,150 --> 00:07:26,960
+prediction models.
+
+137
+00:07:26,960 --> 00:07:30,217
+The sum of these prediction rules gives us the prediction for outcome.
+

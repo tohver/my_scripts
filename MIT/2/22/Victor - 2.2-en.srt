@@ -1,0 +1,452 @@
+0
+00:00:00,710 --> 00:00:04,188
+In this segment, we will talk about high-dimensional sparse models and
+
+1
+00:00:04,188 --> 00:00:06,560
+a penalized regression method called the Lasso.
+
+2
+00:00:06,560 --> 00:00:10,114
+Here, we consider the regression model Y = beta X + epsilon,
+
+3
+00:00:10,114 --> 00:00:14,105
+where beta X is a population-best linear predictor of Y using X.
+
+4
+00:00:14,105 --> 00:00:16,345
+Or simply the population linear regression function.
+
+5
+00:00:16,345 --> 00:00:20,255
+The regresssor X is p-dimensional, with components denoted by Xj.
+
+6
+00:00:20,255 --> 00:00:22,155
+That is, there are p regressors, and
+
+7
+00:00:22,155 --> 00:00:25,995
+p is large, possibly much larger than N, where N is the sample size.
+
+8
+00:00:25,995 --> 00:00:27,625
+In order to simplify the discussion,
+
+9
+00:00:27,625 --> 00:00:31,485
+we assume that each Xj has a unit variance in the sample.
+
+10
+00:00:31,485 --> 00:00:34,206
+Here, we are dealing with the high-dimensional setting,
+
+11
+00:00:34,206 --> 00:00:35,870
+where p/N is not small.
+
+12
+00:00:35,870 --> 00:00:40,110
+Classical linear regression, or ordinary least squares fails in these settings,
+
+13
+00:00:40,110 --> 00:00:43,930
+because it overfits the data, as we have seen in part one of our module.
+
+14
+00:00:43,930 --> 00:00:45,390
+We need to make some assumptions and
+
+15
+00:00:45,390 --> 00:00:49,035
+modify the classical regression method to deal with the high-dimensional case.
+
+16
+00:00:49,035 --> 00:00:52,925
+One intuitive assumption is approximate sparsity, which informally means that
+
+17
+00:00:52,925 --> 00:00:56,425
+there is a small group of regressors that have relatively large coefficients,
+
+18
+00:00:56,425 --> 00:00:59,935
+that can be used to approximate the BLP beta 'X quite well.
+
+19
+00:00:59,935 --> 00:01:02,680
+The rest of regressors have relatively small coefficients.
+
+20
+00:01:02,680 --> 00:01:07,242
+An example of an approximately sparse model is the linear regression model with
+
+21
+00:01:07,242 --> 00:01:12,089
+the regression coefficients beta j given by 1/j-squared as j ranges from 1 to p.
+
+22
+00:01:12,089 --> 00:01:16,310
+The figure that you see here shows the graph of these coefficients.
+
+23
+00:01:16,310 --> 00:01:19,630
+As we can see, the coefficients has decreased quite fast, with only three or
+
+24
+00:01:19,630 --> 00:01:22,180
+four regression coefficients that appear to be large.
+
+25
+00:01:22,180 --> 00:01:25,715
+Formally, the approximate sparsity means that the sorted absolute values
+
+26
+00:01:25,715 --> 00:01:27,938
+of the coefficients decrease to zero fast enough.
+
+27
+00:01:27,938 --> 00:01:32,970
+Namely, the js largest in absolute value coefficient is at most of size j into
+
+28
+00:01:32,970 --> 00:01:38,020
+the power of minus a times a constant, where a is greater than one half.
+
+29
+00:01:38,020 --> 00:01:40,580
+Here, the constant a measures the speed of decay.
+
+30
+00:01:40,580 --> 00:01:43,990
+For estimation purposes, we have a random sample of Yi and
+
+31
+00:01:43,990 --> 00:01:46,020
+Xi, where i ranges from 1 to n.
+
+32
+00:01:46,020 --> 00:01:48,095
+We seek to construct a good linear predictor,
+
+33
+00:01:48,095 --> 00:01:51,510
+head-beta X, which works well when p over N is not small.
+
+34
+00:01:51,510 --> 00:01:55,726
+We can construct head-beta as a solution of the following penalized regression
+
+35
+00:01:55,726 --> 00:01:57,250
+problem called Lasso.
+
+36
+00:01:57,250 --> 00:02:00,480
+Here, we are minimizing the sample mean-squared error that results from
+
+37
+00:02:00,480 --> 00:02:04,810
+predicting Yi with bX plus a penalty term, which penalizes the size of
+
+38
+00:02:04,810 --> 00:02:07,140
+the coefficients, bjs, by their absolute values.
+
+39
+00:02:07,140 --> 00:02:10,330
+We control the degree of penalization by the penalty level lambda.
+
+40
+00:02:10,330 --> 00:02:12,810
+A theoretically justified penalty level for
+
+41
+00:02:12,810 --> 00:02:15,880
+Lasso is given by the formula that you see here.
+
+42
+00:02:15,880 --> 00:02:20,200
+This penalty level ensures that the Lasso predictor, hat beta X, does not overfit
+
+43
+00:02:20,200 --> 00:02:23,810
+the data and delivers good predictive performance under approximate sparsity.
+
+44
+00:02:23,810 --> 00:02:27,040
+Another good way to pick penalty level is by cross-validation,
+
+45
+00:02:27,040 --> 00:02:29,730
+which uses repeated splitting of data into training and
+
+46
+00:02:29,730 --> 00:02:32,150
+testing samples to measure predictive performance.
+
+47
+00:02:32,150 --> 00:02:34,990
+We will discuss cross-validation later in this module.
+
+48
+00:02:34,990 --> 00:02:38,910
+Intuitively, Lasso imposes the approximate sparsity on the coefficients hat beta,
+
+49
+00:02:38,910 --> 00:02:40,050
+just like in the assumption.
+
+50
+00:02:40,050 --> 00:02:42,570
+It presses down all of the coefficients to zero,
+
+51
+00:02:42,570 --> 00:02:46,030
+as much as possible without sacrificing too much fit, and
+
+52
+00:02:46,030 --> 00:02:49,330
+it ends up setting many of these coefficients exactly to zero.
+
+53
+00:02:49,330 --> 00:02:51,470
+We can see this in the simulation example where our Xjs and
+
+54
+00:02:51,470 --> 00:02:54,080
+epsilons are standard normal variables, and
+
+55
+00:02:54,080 --> 00:02:57,950
+the true coefficients beta j are equal to 1 over j squared.
+
+56
+00:02:57,950 --> 00:03:01,150
+Suppose also that n is equal to 300 and p is equal to 1000.
+
+57
+00:03:01,150 --> 00:03:05,170
+The following figure shows that hat beta, in blue, is indeed sparse and
+
+58
+00:03:05,170 --> 00:03:09,026
+is close to the true coefficient vector beta, in black, indeed.
+
+59
+00:03:09,026 --> 00:03:13,350
+Most of hat-beta js are set to 0, except for several coefficients that align quite
+
+60
+00:03:13,350 --> 00:03:17,210
+well with the largest coefficient beta j, or the true coefficient vector.
+
+61
+00:03:17,210 --> 00:03:21,069
+This really shows that Lasso is able to leverage approximate sparsity to deliver
+
+62
+00:03:21,069 --> 00:03:23,590
+good approximation to the true coefficients.
+
+63
+00:03:23,590 --> 00:03:24,415
+From the figure,
+
+64
+00:03:24,415 --> 00:03:27,852
+we see that Lasso sets most of the regression coefficients to zero.
+
+65
+00:03:27,852 --> 00:03:29,690
+It basically figures out approximately,
+
+66
+00:03:29,690 --> 00:03:32,030
+though not perfectly, the right set of regressors.
+
+67
+00:03:32,030 --> 00:03:35,060
+In practice, we often use the Lasso-selected set of regressors
+
+68
+00:03:35,060 --> 00:03:36,820
+to refit the model by least squares.
+
+69
+00:03:36,820 --> 00:03:41,030
+This method is called the least squares post Lasso, or simply post-Lasso.
+
+70
+00:03:41,030 --> 00:03:43,870
+Post Lasso does not shrink large coefficients to zero as much as
+
+71
+00:03:43,870 --> 00:03:44,730
+Lasso does.
+
+72
+00:03:44,730 --> 00:03:47,820
+And it often improves over Lasso in terms of prediction.
+
+73
+00:03:47,820 --> 00:03:51,590
+We next discuss the quality of prediction that Lasso and Post-Lasso methods provide.
+
+74
+00:03:51,590 --> 00:03:56,060
+In what follows, we will use the term Lasso to refer to either of these methods.
+
+75
+00:03:56,060 --> 00:03:59,890
+By definition, the best linear prediction rule, out-of-sample, is beta X, so
+
+76
+00:03:59,890 --> 00:04:04,030
+the question is, does hat-beta X provide a good approximation to beta X?
+
+77
+00:04:04,030 --> 00:04:05,790
+We are trying to estimate p parameters,
+
+78
+00:04:05,790 --> 00:04:09,550
+beta 1 through beta p, imposing the approximate sparsity via penalization.
+
+79
+00:04:09,550 --> 00:04:13,410
+Under sparsity, only a few, say s, parameters will be important.
+
+80
+00:04:13,410 --> 00:04:15,860
+And we can interpret s as the effective dimension.
+
+81
+00:04:15,860 --> 00:04:18,980
+Lasso approximately figures out which parameters are important, and
+
+82
+00:04:18,980 --> 00:04:20,050
+estimates them.
+
+83
+00:04:20,050 --> 00:04:23,100
+Intuitively, to estimate each of the important parameters well,
+
+84
+00:04:23,100 --> 00:04:25,680
+we need many observations per each size parameter.
+
+85
+00:04:25,680 --> 00:04:30,290
+This means that n over s must be large, or equivalently, s over n must be small.
+
+86
+00:04:30,290 --> 00:04:33,250
+This intuition is indeed supported by the following theoretical result,
+
+87
+00:04:33,250 --> 00:04:35,810
+which reads, under regularity conditions,
+
+88
+00:04:35,810 --> 00:04:40,130
+the root of the expected square difference between the best linear predictor and
+
+89
+00:04:40,130 --> 00:04:43,820
+the Lasso predictor is bounded about by a constant times the level of noise,
+
+90
+00:04:43,820 --> 00:04:48,100
+times square root of the effective dimension s times lower p n divided by n.
+
+91
+00:04:48,100 --> 00:04:50,270
+Here, we are averaging over the values of x and
+
+92
+00:04:50,270 --> 00:04:53,502
+the bond holds probability close to one for large enough sample sizes.
+
+93
+00:04:53,502 --> 00:04:56,550
+The effective dimension s is equal to constant times n
+
+94
+00:04:56,550 --> 00:05:00,490
+into the power of 1 over 2a, where a is the rate of decrease of coefficients
+
+95
+00:05:00,490 --> 00:05:01,950
+in the approximate sparsity assumption.
+
+96
+00:05:01,950 --> 00:05:06,270
+In other words, if n is large and the effective dimension s is much smaller than
+
+97
+00:05:06,270 --> 00:05:09,370
+n over log(pn), for nearly all realizations of the sample,
+
+98
+00:05:09,370 --> 00:05:12,865
+the Lasso predictor gets really close to the best linear predictor.
+
+99
+00:05:12,865 --> 00:05:14,470
+Therefore, under approximate sparsity,
+
+100
+00:05:14,470 --> 00:05:18,080
+Lasso and Post-Lasso will approximate the best linear predictor well.
+
+101
+00:05:18,080 --> 00:05:21,450
+This means that Lasso and Post-Lasso won't overfit the data, and
+
+102
+00:05:21,450 --> 00:05:22,770
+we can use the sample and
+
+103
+00:05:22,770 --> 00:05:27,070
+adjusted R squared and MSE to assess out-of-sample predictive performance.
+
+104
+00:05:27,070 --> 00:05:29,850
+Of course, it's always a good idea to verify out-of-sample
+
+105
+00:05:29,850 --> 00:05:32,740
+predictive performance by using test or validation samples.
+
+106
+00:05:32,740 --> 00:05:33,890
+So, let us summarize.
+
+107
+00:05:33,890 --> 00:05:37,960
+We have discussed approximate sparsity as one assumption that makes it possible to
+
+108
+00:05:37,960 --> 00:05:41,170
+perform estimation and prediction with high-dimensional data.
+
+109
+00:05:41,170 --> 00:05:42,520
+We have introduced Lasso,
+
+110
+00:05:42,520 --> 00:05:46,580
+which is a regression method that imposes approximate sparsity by penalization.
+
+111
+00:05:46,580 --> 00:05:51,070
+Under approximate sparsity, Lasso is able to approximate the best linear predictor,
+
+112
+00:05:51,070 --> 00:05:52,930
+and thus produces high quality prediction.
+

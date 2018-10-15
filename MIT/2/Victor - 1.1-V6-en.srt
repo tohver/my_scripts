@@ -1,0 +1,180 @@
+0
+00:00:00,660 --> 00:00:04,090
+Hi, I'm Victor Chernozhukov, professor in the Department of Economics and Center for
+
+1
+00:00:04,090 --> 00:00:05,200
+Statistics at MIT.
+
+2
+00:00:05,200 --> 00:00:07,510
+My research in teaching for this econometrics and
+
+3
+00:00:07,510 --> 00:00:10,330
+mathematical statistics was much of recent efforts
+
+4
+00:00:10,330 --> 00:00:13,650
+due added to the use of machine learning methods for causal Inference.
+
+5
+00:00:13,650 --> 00:00:17,860
+In this module, we will discuss regression in classical and modern versions.
+
+6
+00:00:17,860 --> 00:00:21,448
+Regression analysis is about discovering correlations between the outcome,
+
+7
+00:00:21,448 --> 00:00:24,777
+y and the set of regressors x, which sometimes are also called features.
+
+8
+00:00:24,777 --> 00:00:27,792
+In this module, y is always the real random variable and
+
+9
+00:00:27,792 --> 00:00:32,166
+x is the vector of random variables, with components denoted by X1 through Xp.
+
+10
+00:00:32,166 --> 00:00:36,350
+Where we always assume that a concept of one is included as one of the components.
+
+11
+00:00:36,350 --> 00:00:39,500
+We denote the transpose of a vector by the prime sign.
+
+12
+00:00:39,500 --> 00:00:44,130
+For example, suppose our y is hourly wage which varies across workers, and
+
+13
+00:00:44,130 --> 00:00:47,660
+x is the retro regressors which include variables that measure education,
+
+14
+00:00:47,660 --> 00:00:51,190
+experience gender, and other job relevant characteristics.
+
+15
+00:00:51,190 --> 00:00:54,330
+When we are interested in the effect of a particular component of x and
+
+16
+00:00:54,330 --> 00:00:58,640
+y, we show partition axis for D and W, where D will be the target regressor and
+
+17
+00:00:58,640 --> 00:01:01,340
+W will be called the controls of components.
+
+18
+00:01:01,340 --> 00:01:04,140
+The purpose of the regression analysis is to characterize the statistical
+
+19
+00:01:04,140 --> 00:01:05,420
+relation y to x.
+
+20
+00:01:05,420 --> 00:01:07,000
+Namely, we want to answer two question.
+
+21
+00:01:08,390 --> 00:01:11,100
+Question one, or the prediction question.
+
+22
+00:01:11,100 --> 00:01:13,278
+How can we use x to predict y well?
+
+23
+00:01:15,528 --> 00:01:17,700
+Question two, or the inference question.
+
+24
+00:01:17,700 --> 00:01:20,990
+How does the predicted value of y change if we change a component of x,
+
+25
+00:01:20,990 --> 00:01:23,160
+holding the rest of the components of x fixed?
+
+26
+00:01:23,160 --> 00:01:24,297
+In our wage example,
+
+27
+00:01:24,297 --> 00:01:28,468
+the predictions questions becomes how to use job relevant characteristics,
+
+28
+00:01:28,468 --> 00:01:33,260
+such as education, experience, gender and others, to best predict the wage?
+
+29
+00:01:33,260 --> 00:01:37,280
+An inference question becomes for example, how gender affects the predicted wage?
+
+30
+00:01:37,280 --> 00:01:40,950
+This allows us to uncover gender discrimination if it exists.
+
+31
+00:01:40,950 --> 00:01:43,060
+In this module, we will discuss classical and
+
+32
+00:01:43,060 --> 00:01:45,650
+modern regression tools that answer these two questions.
+
+33
+00:01:45,650 --> 00:01:48,400
+We'll now give a preview of some of the empirical findings from a case
+
+34
+00:01:48,400 --> 00:01:50,870
+study in which we will examine our wage example
+
+35
+00:01:50,870 --> 00:01:55,010
+using data from the US current population survey in 2012 for single workers.
+
+36
+00:01:55,010 --> 00:01:56,920
+We will address the two questions post.
+
+37
+00:01:56,920 --> 00:01:59,290
+Number one, we will construct a prediction rule for
+
+38
+00:01:59,290 --> 00:02:02,970
+a hourly wage which depends on the job relevant characteristics linearly.
+
+39
+00:02:02,970 --> 00:02:06,220
+We will assess the quality of the prediction rule
+
+40
+00:02:06,220 --> 00:02:08,505
+using our sample prediction performance.
+
+41
+00:02:08,505 --> 00:02:12,324
+Number two, we will find that an average women get about $2 less an hourly wage
+
+42
+00:02:12,324 --> 00:02:15,945
+than men with the same experience and other recorded characteristics.
+
+43
+00:02:15,945 --> 00:02:18,635
+This is called the gender wage gap in labor economics and
+
+44
+00:02:18,635 --> 00:02:20,805
+measures in part gender paid discrimination
+

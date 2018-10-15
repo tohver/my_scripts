@@ -1,0 +1,228 @@
+0
+00:00:00,500 --> 00:00:03,940
+In this segment we discuss how to use loss to answer the inference question.
+
+1
+00:00:03,940 --> 00:00:06,670
+Which is how the predictive value of y change
+
+2
+00:00:06,670 --> 00:00:11,190
+if we increase the component of t(x) by holding the other components of x fixed.
+
+3
+00:00:11,190 --> 00:00:14,320
+The answer is a population regression coefficient Beta 1 corresponding to
+
+4
+00:00:14,320 --> 00:00:15,460
+the regressor D.
+
+5
+00:00:15,460 --> 00:00:18,760
+And here would like to discuss how to use Lasso to estimate and
+
+6
+00:00:18,760 --> 00:00:22,890
+construct confidence intervals for beta 1 in the high dimensional setting.
+
+7
+00:00:22,890 --> 00:00:28,480
+We write the regression equation as Y equals beta 1D plus beta 2 w plus epsilon,
+
+8
+00:00:28,480 --> 00:00:32,520
+where d is the target regressor and w's our d controls.
+
+9
+00:00:32,520 --> 00:00:36,280
+We recall from part one of our module that after portioning out
+
+10
+00:00:36,280 --> 00:00:38,583
+we ended up with a simplified regression equation.
+
+11
+00:00:38,583 --> 00:00:46,320
+Tilda Y = tilda d beta 1 + epsilon where epsilon is uncorrelated with tilda d.
+
+12
+00:00:46,320 --> 00:00:48,090
+Here, tilde Y and tilde D,
+
+13
+00:00:48,090 --> 00:00:52,200
+are the residuals that are left after parceling out the linear effect of W.
+
+14
+00:00:52,200 --> 00:00:56,190
+As we argued in part one, this allows us to obtain beta 1 as a coefficient
+
+15
+00:00:56,190 --> 00:00:58,860
+in the linear regression of tilde Y and tilde D.
+
+16
+00:00:58,860 --> 00:01:02,150
+D in the population recovers the partialling-out procedure.
+
+17
+00:01:02,150 --> 00:01:06,340
+For estimation purposes, we have a random sample of Yis and Xis.
+
+18
+00:01:06,340 --> 00:01:09,250
+Our main idea here is that, we will mimic in the sample
+
+19
+00:01:09,250 --> 00:01:11,500
+the partialling-out procedure in the population.
+
+20
+00:01:11,500 --> 00:01:15,170
+Previously, when p over n was small, we employed least squares
+
+21
+00:01:15,170 --> 00:01:17,580
+as the Prediction method in the partialling-out steps.
+
+22
+00:01:17,580 --> 00:01:19,910
+Here p over n is not small, and
+
+23
+00:01:19,910 --> 00:01:23,290
+we employed instead the Lasso method in the partialling-out steps.
+
+24
+00:01:23,290 --> 00:01:25,450
+So let us explain this in more detail.
+
+25
+00:01:25,450 --> 00:01:30,980
+First we round the lasso regression of Yi on Wi and of Di on Wi and
+
+26
+00:01:30,980 --> 00:01:35,930
+keep the resulting residuals called check Wi and check Di.
+
+27
+00:01:35,930 --> 00:01:39,180
+Second we run the list squares of check Wi on check Di.
+
+28
+00:01:39,180 --> 00:01:43,520
+The resulting estimated regression confusion is our estimator check beta one.
+
+29
+00:01:43,520 --> 00:01:45,322
+Our portioning out procedure was loss all.
+
+30
+00:01:45,322 --> 00:01:48,834
+It relies on approximate sparcity in the two portioning out steps.
+
+31
+00:01:48,834 --> 00:01:52,620
+Indeed, theoretically, the procedure will work well if the population regression
+
+32
+00:01:52,620 --> 00:01:56,170
+coefficients and the two parceling out steps are approximately sparse,
+
+33
+00:01:56,170 --> 00:01:59,700
+with a sufficiently high speed of degrees of assorted values,
+
+34
+00:01:59,700 --> 00:02:02,360
+as shown in the conditions that you see here.
+
+35
+00:02:02,360 --> 00:02:05,820
+Now we present the following theoretical result which reads, Under the stated
+
+36
+00:02:05,820 --> 00:02:09,910
+approximate sparsity and other regularity conditions, the estimation error in
+
+37
+00:02:09,910 --> 00:02:14,090
+check Di and check Yi has a negligible effect on check beta 1.
+
+38
+00:02:14,090 --> 00:02:18,580
+And check beta 1 is approximately distributed as normal variable with mean
+
+39
+00:02:18,580 --> 00:02:23,490
+beta 1 and variance V over n where expression of the variance appears here.
+
+40
+00:02:23,490 --> 00:02:27,930
+That is we can say that the estimator check beta 1 concentrates in a square root
+
+41
+00:02:27,930 --> 00:02:32,190
+of V / n neighborhood of beta 1 with deviations controlled by the normal law.
+
+42
+00:02:32,190 --> 00:02:35,540
+We can use this result just like we used the analogous result for
+
+43
+00:02:35,540 --> 00:02:37,460
+the low dimensional case in block one.
+
+44
+00:02:37,460 --> 00:02:42,180
+We can define the standard error of check beta one as square root of hat v over n.
+
+45
+00:02:42,180 --> 00:02:44,220
+Where hat v is an estimator of v.
+
+46
+00:02:44,220 --> 00:02:47,050
+This is our quantification of uncertainty about that one.
+
+47
+00:02:47,050 --> 00:02:51,730
+We then provide the approximate 95% confidence interval for beta 1,
+
+48
+00:02:51,730 --> 00:02:56,615
+which is given by the estimate check beta 1 + or- two standard errors.
+
+49
+00:02:56,615 --> 00:02:57,815
+So let's give a summary.
+
+50
+00:02:57,815 --> 00:03:01,125
+In this segment, we learnt how to estimate the target regression estimate,
+
+51
+00:03:01,125 --> 00:03:03,735
+beta one, in the high dimensional regression problem.
+
+52
+00:03:03,735 --> 00:03:06,875
+We use Lasso to obtain estimates of the outcome Y and
+
+53
+00:03:06,875 --> 00:03:10,955
+target regression D net of the effect of the effect of other regressors W and
+
+54
+00:03:10,955 --> 00:03:13,260
+then run least squares of one on the other.
+
+55
+00:03:13,260 --> 00:03:17,131
+Then we argued that the resulting estimator check beta1 is high quality
+
+56
+00:03:17,131 --> 00:03:21,012
+estimator beta1 and we constructed a confidence interval for beta1,
+

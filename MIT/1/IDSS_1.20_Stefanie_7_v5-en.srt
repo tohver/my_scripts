@@ -1,0 +1,376 @@
+0
+00:00:01,220 --> 00:00:05,345
+In the previous section we have seen how we can explicitly use eigenvectors to
+
+1
+00:00:05,345 --> 00:00:09,607
+recover hidden communities in a graph, and in fairly complex data in general.
+
+2
+00:00:09,607 --> 00:00:16,080
+Next, we will explore another very related criterion for finding communities.
+
+3
+00:00:16,080 --> 00:00:17,520
+There is one difference,
+
+4
+00:00:17,520 --> 00:00:21,670
+in the previous approach we needed to specify the number of communities.
+
+5
+00:00:21,670 --> 00:00:23,330
+Our next method does that automatically.
+
+6
+00:00:24,550 --> 00:00:27,600
+This method is called modularity clustering, and
+
+7
+00:00:27,600 --> 00:00:31,330
+has been widely used to analyze all kinds of networks.
+
+8
+00:00:31,330 --> 00:00:32,226
+For this method,
+
+9
+00:00:32,226 --> 00:00:36,470
+we need to define a modularity score that we will aim to maximize.
+
+10
+00:00:36,470 --> 00:00:39,890
+This score applies to a given clustering in two communities.
+
+11
+00:00:39,890 --> 00:00:43,760
+The characteristic idea of modularity, is to compare the communities
+
+12
+00:00:43,760 --> 00:00:48,300
+to a random baseline graph that share some properties with our actual graph.
+
+13
+00:00:48,300 --> 00:00:51,860
+Such as the number of edges, and roughly, the degree of the nodes.
+
+14
+00:00:52,870 --> 00:00:55,850
+Good communities should have many more edges inside
+
+15
+00:00:55,850 --> 00:00:58,170
+than expected by the baseline.
+
+16
+00:00:58,170 --> 00:01:01,230
+So, let's say we have two candidate communities.
+
+17
+00:01:01,230 --> 00:01:04,450
+How do we measure their deviation from a baseline?
+
+18
+00:01:04,450 --> 00:01:07,660
+We compute the number of edges within a community, and
+
+19
+00:01:07,660 --> 00:01:12,490
+then subtract the expected number of edges as per the baseline model.
+
+20
+00:01:12,490 --> 00:01:17,270
+Concretely, for every pair of nodes, i and j, that are in the same community,
+
+21
+00:01:17,270 --> 00:01:19,270
+we count AIJ minus PIJ.
+
+22
+00:01:20,650 --> 00:01:22,390
+AIJ indicates an edge.
+
+23
+00:01:22,390 --> 00:01:25,293
+It is 1 if i and j are connected, and 0 otherwise.
+
+24
+00:01:25,293 --> 00:01:30,730
+PIJ is the expected number of edges between i and j in the baseline graph.
+
+25
+00:01:31,950 --> 00:01:34,350
+We sum this over all pairs.
+
+26
+00:01:34,350 --> 00:01:37,980
+For each community, we get the actual total number of edges within
+
+27
+00:01:37,980 --> 00:01:43,080
+the community, minus the expected number of edges within the community.
+
+28
+00:01:43,080 --> 00:01:47,210
+If that is large, then the community is surprisingly dense.
+
+29
+00:01:47,210 --> 00:01:50,260
+This score can be generalized to an arbitrary number of communities.
+
+30
+00:01:51,350 --> 00:01:54,340
+What is the expected baseline number of ages?
+
+31
+00:01:54,340 --> 00:01:57,110
+There are several ways to define that baseline model.
+
+32
+00:01:57,110 --> 00:01:58,730
+Here's a common one.
+
+33
+00:01:58,730 --> 00:02:01,220
+The expected number of edges between node i and
+
+34
+00:02:01,220 --> 00:02:05,840
+node j is proportional to the degree of i times the degree of j.
+
+35
+00:02:05,840 --> 00:02:08,670
+So, nodes with edges in our graph
+
+36
+00:02:08,670 --> 00:02:12,290
+are expected to have many edges in the baseline tool.
+
+37
+00:02:12,290 --> 00:02:15,935
+The idea of modularity is that an arbitrary set of nodes, say people in
+
+38
+00:02:15,935 --> 00:02:20,400
+a social network, may have just as many connections as the baseline expect.
+
+39
+00:02:20,400 --> 00:02:23,600
+In that case, the modularity is closed to zero.
+
+40
+00:02:23,600 --> 00:02:27,820
+In the example here, we have an arbitrary partition into meaningless communities.
+
+41
+00:02:27,820 --> 00:02:30,165
+The modularity of this partition is low.
+
+42
+00:02:30,165 --> 00:02:33,600
+Bu, if we pick exceptionally well connected communities,
+
+43
+00:02:33,600 --> 00:02:35,820
+then the modularity is high.
+
+44
+00:02:35,820 --> 00:02:39,040
+In fact, modularity can be negative too.
+
+45
+00:02:39,040 --> 00:02:43,380
+This happens if the number of agents in our community is much lower than expected.
+
+46
+00:02:43,380 --> 00:02:44,361
+It may look like this example.
+
+47
+00:02:44,361 --> 00:02:49,880
+This looks like our edge stretch plots within Laplacian eigenvectors.
+
+48
+00:02:49,880 --> 00:02:51,360
+That's not a coincidence.
+
+49
+00:02:51,360 --> 00:02:53,030
+The phenomenon is closely related.
+
+50
+00:02:54,150 --> 00:02:56,740
+Such communities can be useful, too.
+
+51
+00:02:56,740 --> 00:02:59,160
+Say the nodes in this graph are words, and
+
+52
+00:02:59,160 --> 00:03:02,370
+they have an edge if they co-occur in a collection of texts.
+
+53
+00:03:02,370 --> 00:03:06,820
+Verbs and nouns typically co-occur, but not two verbs or two nouns.
+
+54
+00:03:06,820 --> 00:03:10,590
+So, this partitioning would separate verbs and nouns.
+
+55
+00:03:10,590 --> 00:03:12,790
+But, let's get back to dense communities and
+
+56
+00:03:12,790 --> 00:03:15,320
+find communities that maximize modularity.
+
+57
+00:03:16,345 --> 00:03:20,000
+Note that we do not need to specify the umber of communities.
+
+58
+00:03:20,000 --> 00:03:24,100
+We pick whichever number is best for the score, it happens automatically.
+
+59
+00:03:24,100 --> 00:03:26,460
+How do we find the a good partitioning?
+
+60
+00:03:26,460 --> 00:03:28,160
+We could try all possibilities, but
+
+61
+00:03:28,160 --> 00:03:31,630
+that's going to take really long, even with a very fast computer.
+
+62
+00:03:31,630 --> 00:03:34,440
+One approach is to start with some partitioning and
+
+63
+00:03:34,440 --> 00:03:37,620
+then move nodes between groups, if that improves the score.
+
+64
+00:03:37,620 --> 00:03:41,210
+But it turns out, we can use eigenvectors.
+
+65
+00:03:41,210 --> 00:03:45,010
+This time, we use a matrix that is related to the adjacency matrix and
+
+66
+00:03:45,010 --> 00:03:48,660
+the Laplacian we have already seen, but it's slightly different.
+
+67
+00:03:48,660 --> 00:03:53,750
+Remember our sum over Aij minus Pij to compute the modularity?
+
+68
+00:03:53,750 --> 00:03:56,590
+Our matrix has one entry for each pair of nodes.
+
+69
+00:03:56,590 --> 00:04:00,530
+And the entry in row i and column j is exactly Aij- Pij.
+
+70
+00:04:01,970 --> 00:04:04,680
+Remember, Aij indicates if there's an edge,
+
+71
+00:04:04,680 --> 00:04:07,830
+and Pij is the expected number of edges between i and j.
+
+72
+00:04:08,890 --> 00:04:11,290
+We compute their eigenvectors of this matrix.
+
+73
+00:04:11,290 --> 00:04:14,260
+Again, each eigenvector assigns a value to each node.
+
+74
+00:04:15,365 --> 00:04:19,295
+For two communities, we use the eigenvector with the largest eigenvalue.
+
+75
+00:04:19,295 --> 00:04:22,125
+We put all nodes with positive values in one community, and
+
+76
+00:04:22,125 --> 00:04:24,695
+all nodes with negative values in the other.
+
+77
+00:04:24,695 --> 00:04:28,145
+We can extend this to more eigenvectors and communities.
+
+78
+00:04:28,145 --> 00:04:32,045
+The actual value given by the eigenvector shows how important or
+
+79
+00:04:32,045 --> 00:04:34,295
+central a node is in the community.
+
+80
+00:04:35,380 --> 00:04:40,100
+Now, there's one important difference to our previous vector clustering method.
+
+81
+00:04:40,100 --> 00:04:42,520
+The eigenvalues here can be negative.
+
+82
+00:04:42,520 --> 00:04:46,960
+A negative eigenvalue means that the associated eigenvector gives the node
+
+83
+00:04:46,960 --> 00:04:49,120
+value that leads to low modularity.
+
+84
+00:04:50,270 --> 00:04:52,710
+Let's conclude with a famous example.
+
+85
+00:04:52,710 --> 00:04:54,950
+Zachary's karate club network.
+
+86
+00:04:54,950 --> 00:04:56,240
+In this network here,
+
+87
+00:04:56,240 --> 00:04:59,920
+each node is a member of the karate club at a US university in the 1970s.
+
+88
+00:05:01,260 --> 00:05:04,200
+The edges indicate friendships between the members.
+
+89
+00:05:04,200 --> 00:05:07,710
+Using modularity, we find two communities in this network.
+
+90
+00:05:07,710 --> 00:05:11,790
+Now, the interesting fact is that, shortly after the data collection,
+
+91
+00:05:11,790 --> 00:05:15,750
+there was an internal dispute and the karate club split into two groups.
+
+92
+00:05:15,750 --> 00:05:17,377
+And guess what? The communities found by
+
+93
+00:05:17,377 --> 00:05:21,810
+modularity clustering are exactly the two groups that resulted from the split.
+

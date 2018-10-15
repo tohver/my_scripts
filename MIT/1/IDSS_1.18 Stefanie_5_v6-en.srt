@@ -1,0 +1,404 @@
+0
+00:00:01,130 --> 00:00:05,580
+As we have seen, graph clustering can be useful to understand community structure
+
+1
+00:00:05,580 --> 00:00:07,250
+in a large network.
+
+2
+00:00:07,250 --> 00:00:08,460
+But how do we compute that?
+
+3
+00:00:09,550 --> 00:00:13,430
+What is important here is the global connectivity structure of the graph.
+
+4
+00:00:13,430 --> 00:00:16,328
+To capture that connectivity structure, we will see that,
+
+5
+00:00:16,328 --> 00:00:19,400
+once more, eigenvectors can be really useful.
+
+6
+00:00:19,400 --> 00:00:22,060
+They encode an impressive amount of information about
+
+7
+00:00:22,060 --> 00:00:23,640
+the structure of the graph.
+
+8
+00:00:23,640 --> 00:00:26,750
+We almost just need to read it out to find the clusters.
+
+9
+00:00:26,750 --> 00:00:30,600
+The resulting methods are called spectral methods, and more more precisely,
+
+10
+00:00:30,600 --> 00:00:32,270
+spectral clustering.
+
+11
+00:00:32,270 --> 00:00:35,480
+The spectrum of a matrix is the set of its eigenvalues.
+
+12
+00:00:35,480 --> 00:00:39,360
+We've seen eigenvectors for PCA, but what is the matrix for
+
+13
+00:00:39,360 --> 00:00:41,710
+a graph that gives us the magic eigenvectors?
+
+14
+00:00:41,710 --> 00:00:44,790
+The matrix is the so called Laplacian of the graph.
+
+15
+00:00:44,790 --> 00:00:47,710
+Let's construct it step by step to see what it is.
+
+16
+00:00:47,710 --> 00:00:49,960
+Here's an example graph for illustration.
+
+17
+00:00:49,960 --> 00:00:52,230
+We number the nodes one through n.
+
+18
+00:00:52,230 --> 00:00:56,460
+For a graph with n nodes, the Laplacian is an n by n matrix.
+
+19
+00:00:56,460 --> 00:00:58,860
+It has one row and one column for each node.
+
+20
+00:00:58,860 --> 00:00:59,988
+The entry in row i and
+
+21
+00:00:59,988 --> 00:01:04,190
+column j corresponds to a potential edge between nodes i and j.
+
+22
+00:01:04,190 --> 00:01:07,580
+If there's an edge, the entry is -1, otherwise it's 0.
+
+23
+00:01:07,580 --> 00:01:11,260
+The entries on the diagonal are the degrees of the nodes.
+
+24
+00:01:11,260 --> 00:01:14,450
+The degree of a node is the number of edges that it meets.
+
+25
+00:01:14,450 --> 00:01:19,420
+Often this Laplacian is normalized by appropriately dividing by the degrees or
+
+26
+00:01:19,420 --> 00:01:20,830
+the square root of the degrees.
+
+27
+00:01:20,830 --> 00:01:23,660
+One can also define all of that for graphs.
+
+28
+00:01:23,660 --> 00:01:26,140
+Now what is so special about this matrix?
+
+29
+00:01:26,140 --> 00:01:27,060
+We'll see.
+
+30
+00:01:27,060 --> 00:01:29,920
+Let's have a look at the eigenvectors of the Laplacian.
+
+31
+00:01:29,920 --> 00:01:33,730
+Remember, each eigenvector comes with an eigenvalue.
+
+32
+00:01:33,730 --> 00:01:36,920
+We'll sort them by the eigenvalues in increasing order.
+
+33
+00:01:36,920 --> 00:01:40,240
+We will be interested in the largest and the smallest one.
+
+34
+00:01:40,240 --> 00:01:42,430
+The smallest Eigen value is always 0.
+
+35
+00:01:42,430 --> 00:01:45,590
+In fact, here's our first structural relation.
+
+36
+00:01:45,590 --> 00:01:51,450
+The number of 0 eigenvalues is exactly the number of disconnected parts of the graph.
+
+37
+00:01:51,450 --> 00:01:54,500
+These parts are called connected components.
+
+38
+00:01:54,500 --> 00:01:59,380
+For example, this graph has three connected components and this one has one.
+
+39
+00:02:03,810 --> 00:02:08,390
+Let's assume our graph is one component and let's have a look at the eigenvectors.
+
+40
+00:02:08,390 --> 00:02:11,930
+The eigenvector for eigenvalue 0 is the all once vector.
+
+41
+00:02:11,930 --> 00:02:15,450
+That's the same for all graphs, and hence pretty uninteresting.
+
+42
+00:02:15,450 --> 00:02:19,190
+So let's go on to the second smallest eigenvalue and vector.
+
+43
+00:02:19,190 --> 00:02:23,270
+Each item vector has n entries, one for each node in the graph.
+
+44
+00:02:23,270 --> 00:02:27,380
+Here are two graphs, and we color code the notes by the value in the item vector.
+
+45
+00:02:27,380 --> 00:02:28,780
+Now this is interesting.
+
+46
+00:02:28,780 --> 00:02:32,190
+The values in the eigenvector reflect the graph's vector.
+
+47
+00:02:32,190 --> 00:02:34,700
+Close by nodes have similar colors.
+
+48
+00:02:34,700 --> 00:02:38,360
+In fact, we could find a threshold to partition the nodes.
+
+49
+00:02:38,360 --> 00:02:41,620
+All nodes with values above the threshold go in one group and
+
+50
+00:02:41,620 --> 00:02:42,960
+all others in the other group.
+
+51
+00:02:42,960 --> 00:02:46,270
+If we do this here, we actually find a meaningful clustering in the graph.
+
+52
+00:02:47,320 --> 00:02:50,300
+This eigenvector has a lot of good information for us.
+
+53
+00:02:50,300 --> 00:02:51,640
+What about others?
+
+54
+00:02:51,640 --> 00:02:54,740
+The nest few eigenvectors complement that information.
+
+55
+00:02:54,740 --> 00:02:57,470
+Here's a graph with four natural clusters.
+
+56
+00:02:57,470 --> 00:03:01,310
+Our second eigenvector partitions this nicely into two groups,
+
+57
+00:03:01,310 --> 00:03:03,210
+each consisting of two clusters.
+
+58
+00:03:03,210 --> 00:03:07,840
+The color coding for the third eigenvector also reflects clusters in the graph, but
+
+59
+00:03:07,840 --> 00:03:09,700
+partitions the graph differently.
+
+60
+00:03:09,700 --> 00:03:11,330
+If we take this information for
+
+61
+00:03:11,330 --> 00:03:14,570
+both eigenvectors together, we can easily find all four clusters.
+
+62
+00:03:14,570 --> 00:03:15,776
+This seems extremely useful.
+
+63
+00:03:22,338 --> 00:03:24,750
+The eigenvector is kept to the graph structure.
+
+64
+00:03:24,750 --> 00:03:26,650
+In fact, they gave us more.
+
+65
+00:03:26,650 --> 00:03:29,900
+Remember, our nodes do not have feature vectors.
+
+66
+00:03:29,900 --> 00:03:34,060
+Now, we can give each node one feature value from each eigenvector and
+
+67
+00:03:34,060 --> 00:03:35,220
+we suddenly have vectors.
+
+68
+00:03:36,330 --> 00:03:39,080
+These new features are called an embedding.
+
+69
+00:03:39,080 --> 00:03:40,950
+PCI also gave an embedding.
+
+70
+00:03:40,950 --> 00:03:44,130
+For PCI, we use the vectors with the largest eigenvalues.
+
+71
+00:03:44,130 --> 00:03:46,390
+Here, the smallest ones will be important.
+
+72
+00:03:46,390 --> 00:03:48,040
+What do these features mean?
+
+73
+00:03:48,040 --> 00:03:51,610
+Just like we plotted the fetus from PCA, let's take the second and
+
+74
+00:03:51,610 --> 00:03:55,840
+third smallest eigenvectors and use them as coordinates for the nodes.
+
+75
+00:03:55,840 --> 00:03:57,770
+Here's what this looks like.
+
+76
+00:03:57,770 --> 00:04:01,290
+Nodes that are connected are positioned close by on the plane.
+
+77
+00:04:01,290 --> 00:04:04,660
+Our embedding here wants to minimize the stretch of the edges.
+
+78
+00:04:04,660 --> 00:04:07,410
+And clusters in the graph become clusters in 2D.
+
+79
+00:04:07,410 --> 00:04:10,920
+So far, we've used the eigenvectors with lowest eigenvalues.
+
+80
+00:04:10,920 --> 00:04:13,180
+What about the ones with the largest eigenvalues?
+
+81
+00:04:13,180 --> 00:04:16,285
+Here is what happens if we use these as an embedding.
+
+82
+00:04:16,285 --> 00:04:17,755
+They have the opposite effect.
+
+83
+00:04:17,755 --> 00:04:19,940
+They maximize the stretch of the edges.
+
+84
+00:04:19,940 --> 00:04:23,430
+Nodes that are connected are placed far away on the plane.
+
+85
+00:04:23,430 --> 00:04:25,930
+This is the same graph, but looks so different.
+
+86
+00:04:25,930 --> 00:04:27,530
+Is there an explanation?
+
+87
+00:04:27,530 --> 00:04:32,090
+In fact, the eigenvectors minimize or maximize a different score.
+
+88
+00:04:32,090 --> 00:04:35,100
+Remember, each node gets a value.
+
+89
+00:04:35,100 --> 00:04:39,920
+For each edge, we take the difference of the adjacent node values and square that.
+
+90
+00:04:39,920 --> 00:04:42,250
+We do this for all edges and sum it up.
+
+91
+00:04:42,250 --> 00:04:46,320
+The eigenvectors with small eigenvalues minimize these differences.
+
+92
+00:04:46,320 --> 00:04:49,250
+They give similar values to connected nodes.
+
+93
+00:04:49,250 --> 00:04:52,120
+And the difference can be viewed as the stretch of the edge.
+
+94
+00:04:52,120 --> 00:04:55,070
+The eigenvectors with large eigenvalues maximize the difference,
+
+95
+00:04:55,070 --> 00:04:58,200
+they get very different values to connect the nodes.
+
+96
+00:04:58,200 --> 00:05:00,865
+Overall, we see that the eigenvectors and
+
+97
+00:05:00,865 --> 00:05:04,750
+eigenvalues contain a lot of valuable information about the graph structure,
+
+98
+00:05:04,750 --> 00:05:07,389
+as we may suspect now, they are very useful for clustering.
+
+99
+00:05:08,450 --> 00:05:12,060
+In fact, they contain even more information about the number of paths
+
+100
+00:05:12,060 --> 00:05:15,436
+between any two nodes or about the importance of nodes and edges.
+

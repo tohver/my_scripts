@@ -1,0 +1,460 @@
+0
+00:00:00,750 --> 00:00:03,270
+In the previous lectures, we learned about the classical and
+
+1
+00:00:03,270 --> 00:00:07,590
+modern regression methods and their uses for prediction and inference.
+
+2
+00:00:07,590 --> 00:00:11,760
+This segment is about the use of regression to infer causal relations and
+
+3
+00:00:11,760 --> 00:00:13,490
+answer causal questions.
+
+4
+00:00:13,490 --> 00:00:17,430
+The causal questions are important and they arise in many real-world problems,
+
+5
+00:00:17,430 --> 00:00:21,700
+especially in determining the efficacy of medical treatments, social programs and
+
+6
+00:00:21,700 --> 00:00:24,170
+government policies, and in business applications.
+
+7
+00:00:24,170 --> 00:00:27,660
+For example, does a particular drug cure an illness?
+
+8
+00:00:27,660 --> 00:00:32,590
+Or, do more lenient gun laws increase murder rates and other types of crime?
+
+9
+00:00:32,590 --> 00:00:36,400
+Or, does the introduction of a new product raise profits of a company?
+
+10
+00:00:36,400 --> 00:00:39,630
+We begin by noting that regression uncovers correlation or
+
+11
+00:00:39,630 --> 00:00:42,630
+association between outcome variables and regressors.
+
+12
+00:00:42,630 --> 00:00:45,270
+However, correlation or association
+
+13
+00:00:45,270 --> 00:00:49,560
+does not necessarily imply a causal relation unless certain assumptions hold.
+
+14
+00:00:49,560 --> 00:00:54,380
+The association between outcome variable Y and a regressor D formally means that D
+
+15
+00:00:54,380 --> 00:00:59,290
+predicts Y, namely the coefficient in the linear regression of Y when D is not zero,
+
+16
+00:00:59,290 --> 00:01:04,130
+or that, more generally, conditional expectation of Y given D is not constant.
+
+17
+00:01:04,130 --> 00:01:06,320
+This is what the regression analysis gives us.
+
+18
+00:01:06,320 --> 00:01:11,670
+So why doesn't association between Y and D necessarily imply that D causes Y?
+
+19
+00:01:11,670 --> 00:01:12,970
+Here is a contrived example.
+
+20
+00:01:12,970 --> 00:01:17,290
+Suppose we conduct an observational study on people's us of pain-killers and pain.
+
+21
+00:01:17,290 --> 00:01:21,120
+We record the outcome variable Y, which is whether a person is in pain, and
+
+22
+00:01:21,120 --> 00:01:22,630
+a regressor variable D,
+
+23
+00:01:22,630 --> 00:01:26,730
+which is whether the person has taken a pain-killer medicine.
+
+24
+00:01:26,730 --> 00:01:30,640
+It's likely that people will take these pills when they are in fact in pain and so
+
+25
+00:01:30,640 --> 00:01:33,540
+we are likely to find that D indeed predicts Y so
+
+26
+00:01:33,540 --> 00:01:36,350
+that the regression coefficient of Y on D is positive.
+
+27
+00:01:36,350 --> 00:01:41,310
+Y and D are associated but D does not cause Y as we know from the clinical
+
+28
+00:01:41,310 --> 00:01:45,570
+trials in medicine that establish that pain killers actually work to remove pain.
+
+29
+00:01:45,570 --> 00:01:48,860
+An ideal way to establish a causal relation from the regression analysis is
+
+30
+00:01:48,860 --> 00:01:51,700
+to rely on data from a randomized control trial.
+
+31
+00:01:51,700 --> 00:01:55,570
+And in the mass control trials we have the so called random assignment or.
+
+32
+00:01:55,570 --> 00:01:58,030
+Remember the treatment variable T is a sign or
+
+33
+00:01:58,030 --> 00:02:01,230
+generic D that is independent of specific outcomes.
+
+34
+00:02:01,230 --> 00:02:03,310
+Specifically in randomized control trials or
+
+35
+00:02:03,310 --> 00:02:06,800
+experiments we have a group of treated participants and the untreated ones.
+
+36
+00:02:06,800 --> 00:02:10,190
+The letter called the control group, and there are no systematic differences
+
+37
+00:02:10,190 --> 00:02:12,430
+between the two groups when the trial starts.
+
+38
+00:02:12,430 --> 00:02:16,070
+After the trial is completed, we record the outcomes of interest for
+
+39
+00:02:16,070 --> 00:02:20,290
+participants in the two groups, and carry out the regression analysis to estimate
+
+40
+00:02:20,290 --> 00:02:24,350
+the regression equation Y = alpha + beta D + u.
+
+41
+00:02:24,350 --> 00:02:27,820
+Here the regression coefficient beta D measures the causal input, or
+
+42
+00:02:27,820 --> 00:02:29,870
+the treatment, on average outcomes.
+
+43
+00:02:29,870 --> 00:02:32,530
+And so beta is called the average treatment effect.
+
+44
+00:02:32,530 --> 00:02:36,280
+Under random assignment we don't need to use any additional regressors or controls.
+
+45
+00:02:36,280 --> 00:02:40,270
+However we may use additional controls to improve the precision of estimating
+
+46
+00:02:40,270 --> 00:02:41,930
+the average treatment effect better.
+
+47
+00:02:41,930 --> 00:02:44,290
+This is called the Co variate adjustment method.
+
+48
+00:02:44,290 --> 00:02:47,840
+Specifically we may set up a linear or partially linear model
+
+49
+00:02:47,840 --> 00:02:52,660
+Y equals beta G plus G of zed plus epsilon and carry out inference variable using
+
+50
+00:02:52,660 --> 00:02:55,080
+the inference methods that we have learned in this module.
+
+51
+00:02:55,080 --> 00:02:58,120
+The randomized control trials represent the golden standard in proving that
+
+52
+00:02:58,120 --> 00:03:00,510
+medical treatments and social programs work, and for
+
+53
+00:03:00,510 --> 00:03:04,490
+this reason they are very widely used in medicine and in policy analysis.
+
+54
+00:03:04,490 --> 00:03:07,550
+And randomized control trials are also widely used in business applications,
+
+55
+00:03:07,550 --> 00:03:09,200
+under the name of AIB testing.
+
+56
+00:03:09,200 --> 00:03:12,040
+To evaluate whether new products and services raise profits.
+
+57
+00:03:12,040 --> 00:03:15,860
+But if we don't have access to the data from the randomized controlled trials.
+
+58
+00:03:15,860 --> 00:03:19,180
+What if we work a data set that is pure observation.
+
+59
+00:03:19,180 --> 00:03:22,753
+Under what conditions can we claim that we've established a causal relationship.
+
+60
+00:03:22,753 --> 00:03:27,134
+A sufficient condition is that D, variable of interest is generated as if randomly
+
+61
+00:03:27,134 --> 00:03:30,460
+assigned, conditional on the set of control Z.
+
+62
+00:03:30,460 --> 00:03:33,800
+This is called the conditional random assignment, or conditional exogeneity.
+
+63
+00:03:33,800 --> 00:03:35,130
+There is condition on Z,
+
+64
+00:03:35,130 --> 00:03:38,590
+variation in D is as if it were generated through some experiment.
+
+65
+00:03:38,590 --> 00:03:40,690
+As in a randomized control trial.
+
+66
+00:03:40,690 --> 00:03:43,730
+In this case, we can also apply the partial linear regression model,
+
+67
+00:03:43,730 --> 00:03:47,430
+Y = beta D + g(Z) + epsilon, and
+
+68
+00:03:47,430 --> 00:03:52,120
+beta D indeed measures the causal effect of D on average outcome controlling for Z.
+
+69
+00:03:52,120 --> 00:03:55,820
+We then apply the inference method that we have learned to beta, and
+
+70
+00:03:55,820 --> 00:03:57,750
+construct confidence intervals.
+
+71
+00:03:57,750 --> 00:04:00,910
+One note that we would like to make here is that under conditional random
+
+72
+00:04:00,910 --> 00:04:05,770
+assignment, or conditional unlike under pure random assignment, controls must
+
+73
+00:04:05,770 --> 00:04:09,810
+be included to ensure that we measure the causal effect and not something else.
+
+74
+00:04:09,810 --> 00:04:12,920
+Under pure random assignment, we do measure the causal effect and
+
+75
+00:04:12,920 --> 00:04:15,860
+not something else whether or not we include the controls.
+
+76
+00:04:15,860 --> 00:04:18,020
+So on the conditional random assignment or
+
+77
+00:04:18,020 --> 00:04:21,510
+conditional exogeneity, regression doesn't cover causal effects.
+
+78
+00:04:21,510 --> 00:04:22,110
+For example,
+
+79
+00:04:22,110 --> 00:04:27,240
+recall our case study of the impact of gun ownership on predicted gun homicide rates.
+
+80
+00:04:27,240 --> 00:04:30,100
+We did find that there that increases in gun ownership rates lead
+
+81
+00:04:30,100 --> 00:04:33,340
+to higher predicted gun homicide rates, after controlling for
+
+82
+00:04:33,340 --> 00:04:37,030
+the demographic and economic characteristics of various counties.
+
+83
+00:04:37,030 --> 00:04:40,530
+If we believe that the variation in gun ownership rates across counties
+
+84
+00:04:40,530 --> 00:04:44,190
+was as good as randomly assigned, after controlling for these characteristics,
+
+85
+00:04:44,190 --> 00:04:47,880
+then we should conclude that the predictive effect is a causal effect.
+
+86
+00:04:47,880 --> 00:04:51,060
+If we don't believe that this variation is as good as randomly assigned,
+
+87
+00:04:51,060 --> 00:04:54,000
+even after controlling for all these characteristics, then we shouldn't
+
+88
+00:04:54,000 --> 00:04:57,750
+conclude that the predictive effect we've found Is a causal effect.
+
+89
+00:04:57,750 --> 00:04:59,420
+Similarly, in another case study,
+
+90
+00:04:59,420 --> 00:05:02,490
+we studied the impact of being female on the predicted wage.
+
+91
+00:05:02,490 --> 00:05:05,970
+We did find that females get paid on average two dollars less per hour
+
+92
+00:05:05,970 --> 00:05:10,650
+than men, controlling for education, experience, and geographical location.
+
+93
+00:05:10,650 --> 00:05:13,870
+If we believe that the variation of gender conditional on these controls
+
+94
+00:05:13,870 --> 00:05:17,000
+is as good as randomly assigned, then we should conclude that the predictive
+
+95
+00:05:17,000 --> 00:05:20,650
+effect is a causal effect, which is the discrimination effect in this context.
+
+96
+00:05:20,650 --> 00:05:24,120
+However, if we don't believe that this variation is as good as randomly assigned,
+
+97
+00:05:24,120 --> 00:05:27,110
+then we should not claim that this effect is due to discrimination.
+
+98
+00:05:27,110 --> 00:05:31,430
+As you can see, making causal claims from the observational data is difficult and
+
+99
+00:05:31,430 --> 00:05:34,940
+the success really depends on being convincing at persuading ourselves and
+
+100
+00:05:34,940 --> 00:05:38,200
+others that the assumption of conditional random assignment or
+
+101
+00:05:38,200 --> 00:05:43,010
+conditional exogeneity holds here, the burden of persuasion lies entirely on
+
+102
+00:05:43,010 --> 00:05:47,030
+the data scientist, if indeed she or he is willing to make the causal claim.
+
+103
+00:05:47,030 --> 00:05:49,570
+I would like to conclude this module with some parting remarks.
+
+104
+00:05:49,570 --> 00:05:53,360
+In this module we studied the use of the classical and modern linear and non-linear
+
+105
+00:05:53,360 --> 00:05:57,410
+regression for purposes of prediction and inference, including causal inference.
+
+106
+00:05:57,410 --> 00:05:59,720
+The material in this module is very difficult and
+
+107
+00:05:59,720 --> 00:06:02,670
+if you've managed to navigate through it you have done extremely well.
+
+108
+00:06:02,670 --> 00:06:04,930
+If you are interested in having additional reading and
+
+109
+00:06:04,930 --> 00:06:08,970
+in replicating the case studies yourself, I have the following materials for you.
+
+110
+00:06:08,970 --> 00:06:10,625
+First I have a complete set of slides.
+
+111
+00:06:10,625 --> 00:06:12,145
+That accompany the video lectures.
+
+112
+00:06:12,145 --> 00:06:16,965
+And second, I have data sets and programs written in R that carry out the studies.
+
+113
+00:06:16,965 --> 00:06:19,065
+I encourage you to check and try those out.
+
+114
+00:06:19,065 --> 00:06:22,965
+With this, let me say goodbye, and wish you luck in your data science adventures.
+

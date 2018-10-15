@@ -1,0 +1,468 @@
+0
+00:00:00,340 --> 00:00:03,620
+In this segment, we overview other penalized regression methods and
+
+1
+00:00:03,620 --> 00:00:07,400
+also discuss cross-validation, which is a method to choose tuning parameters for
+
+2
+00:00:07,400 --> 00:00:08,730
+the prediction rules.
+
+3
+00:00:08,730 --> 00:00:13,037
+We are interested in prediction in the linear model Y = beta X + epsilon,
+
+4
+00:00:13,037 --> 00:00:15,850
+where epsilon isn't correlated with X.
+
+5
+00:00:15,850 --> 00:00:18,860
+And we have random sample of Yi and Xis.
+
+6
+00:00:18,860 --> 00:00:23,520
+Our generic predictor will take the linear form hat f of x = hat beta x.
+
+7
+00:00:23,520 --> 00:00:27,685
+The idea of penalized regression is to choose the coefficients hat beta,
+
+8
+00:00:27,685 --> 00:00:30,190
+to avoid overfitting in the sample.
+
+9
+00:00:30,190 --> 00:00:33,380
+This is achieved by penalizing the size of the coefficients by
+
+10
+00:00:33,380 --> 00:00:34,710
+various penalty functions.
+
+11
+00:00:34,710 --> 00:00:37,540
+Ideally, we should choose the level of penalization
+
+12
+00:00:37,540 --> 00:00:41,340
+to minimize the out-of-sample mean squared prediction error.
+
+13
+00:00:41,340 --> 00:00:43,140
+We first consider the Ridge method.
+
+14
+00:00:43,140 --> 00:00:47,590
+The Ridge method estimates coefficients by penalized least squares, where we minimize
+
+15
+00:00:47,590 --> 00:00:51,960
+the sum of squared prediction error plus the penalty term given by the sum
+
+16
+00:00:51,960 --> 00:00:56,390
+of the squared values of the coefficients times a penalty level, lambda.
+
+17
+00:00:56,390 --> 00:00:58,919
+We can see this in the formula given here.
+
+18
+00:00:58,919 --> 00:01:03,816
+If we look at the formula, we notice that analogous to the Lasso, Ridge penalty
+
+19
+00:01:03,816 --> 00:01:09,000
+presses down or penalizes the coefficients without sacrificing too much fit.
+
+20
+00:01:09,000 --> 00:01:12,920
+In contrast to Lasso, Ridge penalizes the large values of coefficients much more
+
+21
+00:01:12,920 --> 00:01:15,720
+aggressively and small values much less aggressively.
+
+22
+00:01:15,720 --> 00:01:18,670
+Because Ridge penalizes small coefficients very lightly,
+
+23
+00:01:18,670 --> 00:01:20,380
+the Ridge fit is never sparse.
+
+24
+00:01:20,380 --> 00:01:24,800
+And unlike Lasso, Ridge does not set estimated coefficients to zero, and so
+
+25
+00:01:24,800 --> 00:01:26,940
+it does not do variable selection.
+
+26
+00:01:26,940 --> 00:01:31,363
+Because of this property, Ridge predictor hat beta X is especially well suited for
+
+27
+00:01:31,363 --> 00:01:33,131
+prediction in the dense models,
+
+28
+00:01:33,131 --> 00:01:37,509
+where the beta js are all small without necessarily being approximately sparse.
+
+29
+00:01:37,509 --> 00:01:42,820
+In this case, it can easily outperform the Lasso predictor.
+
+30
+00:01:42,820 --> 00:01:45,511
+Finally we noted in practice, we can choose the penalty level lambda in Ridge,
+
+31
+00:01:45,511 --> 00:01:48,190
+by cross-validation which we will discuss later in this segment.
+
+32
+00:01:48,190 --> 00:01:51,530
+A Ridge and Lasso have other useful modifications or hybrids.
+
+33
+00:01:51,530 --> 00:01:54,670
+One popular modification is the method called the elastic net.
+
+34
+00:01:54,670 --> 00:01:58,110
+Here we estimate the coefficients by penalized least squares
+
+35
+00:01:58,110 --> 00:02:00,894
+with penalty given by the linear combination of the Lasso and
+
+36
+00:02:00,894 --> 00:02:03,660
+the Ridge penalties as you see in this formula.
+
+37
+00:02:03,660 --> 00:02:07,210
+In the formula, we see that the penalty function has two penalty levels,
+
+38
+00:02:07,210 --> 00:02:11,710
+lambda 1 and lambda 2, which could be chosen by cross-validation in practice.
+
+39
+00:02:11,710 --> 00:02:14,210
+Now, let us look at the formula carefully.
+
+40
+00:02:14,210 --> 00:02:17,110
+We see that the elastic net penalizes large coefficients
+
+41
+00:02:17,110 --> 00:02:18,420
+as aggressively as Ridge.
+
+42
+00:02:18,420 --> 00:02:22,990
+And we also see that it penalizes small coefficients as aggressively as Lasso.
+
+43
+00:02:22,990 --> 00:02:26,360
+By selecting different values of penalty levels, lambda 1 and
+
+44
+00:02:26,360 --> 00:02:28,760
+lambda 2, we could have more flexibility for
+
+45
+00:02:28,760 --> 00:02:32,910
+building a good prediction rule than with just Ridge or with just Lasso.
+
+46
+00:02:32,910 --> 00:02:36,496
+We also note that the elastic net doesn't perform variable selection,
+
+47
+00:02:36,496 --> 00:02:40,495
+unless we completely shutdown the Lasso penalty by setting penalty level lambda
+
+48
+00:02:40,495 --> 00:02:42,000
+2 equals zero.
+
+49
+00:02:42,000 --> 00:02:44,320
+Elastic net works well in regression models,
+
+50
+00:02:44,320 --> 00:02:48,100
+where regression coefficients are either approximately sparse or dense.
+
+51
+00:02:48,100 --> 00:02:51,860
+Another useful modification of Lasso and Ridge is the lava method.
+
+52
+00:02:51,860 --> 00:02:55,010
+In the lava method, we estimate the coefficients by the penalized least
+
+53
+00:02:55,010 --> 00:02:57,670
+squares as shown in this form.
+
+54
+00:02:57,670 --> 00:03:01,760
+If we look at the formula carefully, we see that, just like previously,
+
+55
+00:03:01,760 --> 00:03:06,130
+we are minimizing the sum of squared prediction errors from predicting outcome
+
+56
+00:03:06,130 --> 00:03:10,170
+observations Yi with a linear and Xi prediction rule plus a penalty term.
+
+57
+00:03:10,170 --> 00:03:14,010
+However, unlike previously, we are splitting the parameter components into
+
+58
+00:03:14,010 --> 00:03:19,340
+gamma j, + delta j, and penalize gamma j like in Ridge and delta j like in Lasso.
+
+59
+00:03:19,340 --> 00:03:22,630
+There are two corresponding penalty levels, lambda 1 and lambda 2,
+
+60
+00:03:22,630 --> 00:03:25,520
+which can be chosen by cross-validation in practice.
+
+61
+00:03:25,520 --> 00:03:29,410
+Now, because of the splitting, lava penalizes coefficients least aggressively
+
+62
+00:03:29,410 --> 00:03:33,290
+compared to Ridge, Lasso, or elastic net, because it penalizes large coefficients
+
+63
+00:03:33,290 --> 00:03:36,190
+like in Lasso and small coefficients like in Ridge.
+
+64
+00:03:36,190 --> 00:03:38,880
+Lava never sets estimated coefficients to zero, and so
+
+65
+00:03:38,880 --> 00:03:40,560
+it doesn't do variable selection.
+
+66
+00:03:40,560 --> 00:03:43,670
+The lava method works really well in sparse + dense models,
+
+67
+00:03:43,670 --> 00:03:45,360
+where there are several large coefficients and
+
+68
+00:03:45,360 --> 00:03:48,040
+many small coefficients, which are not necessarily sparse.
+
+69
+00:03:48,040 --> 00:03:51,710
+In these types of models, lava significantly outperforms Lasso, Ridge or
+
+70
+00:03:51,710 --> 00:03:52,380
+elastic net.
+
+71
+00:03:52,380 --> 00:03:54,930
+We have all ready mentioned cross-validation several times during
+
+72
+00:03:54,930 --> 00:03:55,825
+the course of the segment.
+
+73
+00:03:55,825 --> 00:03:58,760
+Cross-validation is an important and common practical tool
+
+74
+00:03:58,760 --> 00:04:02,790
+that provides a way to choose tuning parameters such as the penalty levels.
+
+75
+00:04:02,790 --> 00:04:06,380
+The idea of cross-validation is to rely on the repeated splitting of the training
+
+76
+00:04:06,380 --> 00:04:09,723
+data to estimate the potential out-of-sample predictive performance.
+
+77
+00:04:09,723 --> 00:04:11,574
+Cross-validation proceeds in three steps,
+
+78
+00:04:11,574 --> 00:04:13,720
+which we've first described in words as follows.
+
+79
+00:04:13,720 --> 00:04:16,800
+In step 1, we divide the data into K blocks called folds.
+
+80
+00:04:16,800 --> 00:04:20,790
+For example was, K equal to five, we split the data into five parts.
+
+81
+00:04:20,790 --> 00:04:23,080
+In step 2, we begin by leaving one block out.
+
+82
+00:04:23,080 --> 00:04:25,480
+We fit the prediction rule on all other blocks,
+
+83
+00:04:25,480 --> 00:04:28,710
+we then predict outcome observations in the left out block and
+
+84
+00:04:28,710 --> 00:04:31,090
+record the empirical mean squared prediction error.
+
+85
+00:04:31,090 --> 00:04:33,058
+We repeat this procedure for each block.
+
+86
+00:04:33,058 --> 00:04:37,530
+In step 3, we average the empirical mean squared prediction errors over blocks.
+
+87
+00:04:37,530 --> 00:04:41,200
+We do these steps for several or many values of the tuning parameters, and
+
+88
+00:04:41,200 --> 00:04:44,270
+we choose the best tuning parameter to minimize the average mean squared
+
+89
+00:04:44,270 --> 00:04:45,150
+prediction error.
+
+90
+00:04:45,150 --> 00:04:48,250
+Let us now consider more formal description of cross-validation.
+
+91
+00:04:48,250 --> 00:04:52,980
+We randomly select equal sized blocks B1 through Bk to randomly partition
+
+92
+00:04:52,980 --> 00:04:55,260
+the observation indices one through M.
+
+93
+00:04:55,260 --> 00:04:59,870
+We then fit a prediction rule denoted by hat f sub -k or X and theta.
+
+94
+00:04:59,870 --> 00:05:03,400
+Where theta denotes tuning parameters such as penalty levels, and
+
+95
+00:05:03,400 --> 00:05:08,100
+hat f sub -k depends only on observations that are not in the block Bk.
+
+96
+00:05:08,100 --> 00:05:12,790
+The empirical mean squared error for the block of observations Bk is given by
+
+97
+00:05:12,790 --> 00:05:17,060
+the average squared prediction error for this block, as shown in this formula.
+
+98
+00:05:17,060 --> 00:05:19,270
+In this formula M is the size of the block.
+
+99
+00:05:19,270 --> 00:05:22,970
+The cross validated MSE is the average of MSEs for
+
+100
+00:05:22,970 --> 00:05:25,520
+each block as shown again, in this formula.
+
+101
+00:05:25,520 --> 00:05:28,130
+Finally, the best tuning parameter theta
+
+102
+00:05:28,130 --> 00:05:30,680
+is chosen by minimizing the cross validated MSE.
+
+103
+00:05:31,830 --> 00:05:33,948
+We now provide some concluding remarks.
+
+104
+00:05:33,948 --> 00:05:37,870
+First, we note that in contrast to Lasso, the theoretical properties of Ridge and
+
+105
+00:05:37,870 --> 00:05:40,370
+other penalized procedures are less well understood
+
+106
+00:05:40,370 --> 00:05:42,360
+in the high-dimensional case, yet.
+
+107
+00:05:42,360 --> 00:05:46,158
+So it is a good idea to rely on test data to assess their predictive performance.
+
+108
+00:05:46,158 --> 00:05:50,350
+Second, we note that cross validation is a good way to choose penalty levels, but its
+
+109
+00:05:50,350 --> 00:05:54,460
+theoretical properties are not completely understood in high-dimensional case yet.
+
+110
+00:05:54,460 --> 00:05:57,220
+So again, it is a good idea to rely on task data
+
+111
+00:05:57,220 --> 00:05:59,830
+to assess the predictive performance of cross-validated rules.
+
+112
+00:05:59,830 --> 00:06:02,480
+Finally, we may want to ask a question here.
+
+113
+00:06:02,480 --> 00:06:05,200
+How do the penalize regression methods work in practice?
+
+114
+00:06:05,200 --> 00:06:07,960
+In the next part of our module we will assess the predictive
+
+115
+00:06:07,960 --> 00:06:10,210
+performance of these methods in a real example,
+
+116
+00:06:10,210 --> 00:06:15,359
+where we will also compare these methods to modern nonlinear regression methods.
+

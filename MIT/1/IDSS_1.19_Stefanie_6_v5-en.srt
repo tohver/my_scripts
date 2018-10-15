@@ -1,0 +1,408 @@
+0
+00:00:01,060 --> 00:00:04,410
+Communities and networks give us a much better understanding of network
+
+1
+00:00:04,410 --> 00:00:07,900
+properties, friendships or functional groups.
+
+2
+00:00:07,900 --> 00:00:11,650
+In the past sections, we've seen criteria for finding communities and
+
+3
+00:00:11,650 --> 00:00:15,780
+we've seen that eigenvectors capture important properties of the network.
+
+4
+00:00:15,780 --> 00:00:18,020
+Now we'll put everything together.
+
+5
+00:00:18,020 --> 00:00:21,800
+Let's start with a graph where there are no connections between communities, and
+
+6
+00:00:21,800 --> 00:00:24,838
+build this so called adjacency matrix.
+
+7
+00:00:24,838 --> 00:00:25,860
+For every node,
+
+8
+00:00:25,860 --> 00:00:31,030
+we put the strengths of the connection, or edge, to every other node in the matrix.
+
+9
+00:00:31,030 --> 00:00:34,400
+If there is no connection, we'll put a 0.
+
+10
+00:00:34,400 --> 00:00:38,810
+The Laplacian matrix that we've seen previously is closely related.
+
+11
+00:00:38,810 --> 00:00:43,190
+Put the roll sums on the diagonal and negate the other numbers.
+
+12
+00:00:43,190 --> 00:00:45,543
+Both matrices have the same block structure.
+
+13
+00:00:45,543 --> 00:00:49,622
+And each block consists of edges of one community.
+
+14
+00:00:49,622 --> 00:00:51,442
+Of course, in a real network,
+
+15
+00:00:51,442 --> 00:00:55,645
+we don't know how to order the nodes to make this block pattern emerge.
+
+16
+00:00:55,645 --> 00:00:57,966
+So, how do we find the blocks?
+
+17
+00:00:57,966 --> 00:01:01,410
+Let's take a look at the eigenvector software of the matrix.
+
+18
+00:01:01,410 --> 00:01:05,220
+The bottom three vectors, exactly indicate the block structure.
+
+19
+00:01:05,220 --> 00:01:08,870
+And, they each, exactly indicate the nodes, of long community.
+
+20
+00:01:08,870 --> 00:01:12,880
+The remaining eigenvectors are less important here.
+
+21
+00:01:12,880 --> 00:01:16,040
+This works even if the nodes are scrambled.
+
+22
+00:01:16,040 --> 00:01:19,590
+For each node, recreate a feature vector as we've seen before.
+
+23
+00:01:19,590 --> 00:01:22,090
+One entry from each eigenvector.
+
+24
+00:01:22,090 --> 00:01:26,930
+These feature vectors directly indicate which community the node belongs to.
+
+25
+00:01:26,930 --> 00:01:31,450
+In reality of course, the communities are not separated so clearly.
+
+26
+00:01:31,450 --> 00:01:35,650
+There are edges between communities, and edges within communities that are missing.
+
+27
+00:01:35,650 --> 00:01:38,270
+But if there are not too many of these extra edges,
+
+28
+00:01:38,270 --> 00:01:41,670
+the eigenvectors don't change too much, and things still work out.
+
+29
+00:01:41,670 --> 00:01:45,550
+To see this, we can use our new features as an embedding,
+
+30
+00:01:45,550 --> 00:01:47,830
+just like we've done previously.
+
+31
+00:01:47,830 --> 00:01:50,820
+Here we have three features, so three dimensions.
+
+32
+00:01:50,820 --> 00:01:53,340
+We plot each node on these three axis, and
+
+33
+00:01:53,340 --> 00:01:57,420
+see that the graph communities emerge, as well as separated clusters.
+
+34
+00:01:57,420 --> 00:02:01,560
+This suggests the following approach called spectral clustering.
+
+35
+00:02:01,560 --> 00:02:06,040
+First, we write down the laplacian, which comes from the adjacent matrix.
+
+36
+00:02:06,040 --> 00:02:10,350
+Then we compute the eigenvectors and keep the few bottom ones.
+
+37
+00:02:10,350 --> 00:02:12,048
+The eigenvectors give new features.
+
+38
+00:02:12,048 --> 00:02:16,460
+We use K-means clustering on those new features.
+
+39
+00:02:16,460 --> 00:02:20,450
+This works because the new features magically separate the communities.
+
+40
+00:02:20,450 --> 00:02:24,330
+To find K clusters, one typically uses K-eigenvectors.
+
+41
+00:02:24,330 --> 00:02:26,000
+If the graph is completely connected,
+
+42
+00:02:26,000 --> 00:02:30,050
+there's a Bohring-Eigen vector all at once that we discard right away.
+
+43
+00:02:30,050 --> 00:02:34,210
+They are variants of spectral clustering, but the main idea is the same.
+
+44
+00:02:34,210 --> 00:02:37,270
+Now recall our criteria from the very beginning
+
+45
+00:02:37,270 --> 00:02:41,440
+where we wanted clusters of decent size with small cut between them.
+
+46
+00:02:41,440 --> 00:02:43,770
+This sounds very different from our eigenvectors here,
+
+47
+00:02:43,770 --> 00:02:46,790
+but in fact there's a closed connection.
+
+48
+00:02:46,790 --> 00:02:51,790
+We can give labels to nodes to indicate the optimal clusters for the criterion.
+
+49
+00:02:51,790 --> 00:02:55,090
+For example, a special positive number for cluster one, and
+
+50
+00:02:55,090 --> 00:02:57,470
+a special negative number for cluster two.
+
+51
+00:02:57,470 --> 00:02:59,770
+The eigenvectors approximate those labels.
+
+52
+00:03:00,960 --> 00:03:06,300
+Actually, spectral clustering is widely used even for data that is not a network.
+
+53
+00:03:06,300 --> 00:03:08,890
+Recall K means if you plug the data points,
+
+54
+00:03:08,890 --> 00:03:11,790
+the clusters we find with K-means are round.
+
+55
+00:03:11,790 --> 00:03:14,230
+So here's an example of data with clusters.
+
+56
+00:03:14,230 --> 00:03:16,360
+But they are not round.
+
+57
+00:03:16,360 --> 00:03:18,390
+The data seems to curve around, and
+
+58
+00:03:18,390 --> 00:03:21,058
+intuitively, we'd like to follow that curvy structure.
+
+59
+00:03:21,058 --> 00:03:24,860
+We run K-means, and the clusters look a bit odd.
+
+60
+00:03:24,860 --> 00:03:27,450
+They disregard the shape of the data.
+
+61
+00:03:27,450 --> 00:03:30,400
+Well, spectral clustering can help here.
+
+62
+00:03:30,400 --> 00:03:32,840
+We translate the data into the world of graphs.
+
+63
+00:03:32,840 --> 00:03:35,210
+Concretely, if you build a graph from the data.
+
+64
+00:03:35,210 --> 00:03:37,450
+For each data point, we create a node and
+
+65
+00:03:37,450 --> 00:03:41,170
+connect it to what's closest or most similar points nearby.
+
+66
+00:03:41,170 --> 00:03:44,940
+The graph now reflects local relationships between our data points.
+
+67
+00:03:44,940 --> 00:03:47,270
+It follows the shape of the data.
+
+68
+00:03:47,270 --> 00:03:48,970
+Now we used spectral clustering.
+
+69
+00:03:48,970 --> 00:03:52,365
+We get clusters of points that are densely connected in the graph.
+
+70
+00:03:52,365 --> 00:03:54,610
+These clusters do follow the shape.
+
+71
+00:03:54,610 --> 00:03:57,520
+They look very different and more meaningful.
+
+72
+00:03:57,520 --> 00:03:58,250
+In summary,
+
+73
+00:03:58,250 --> 00:04:02,255
+to use spectral clustering on other data, we just add one step to our procedure.
+
+74
+00:04:02,255 --> 00:04:05,650
+Create the so called neighborhood graph.
+
+75
+00:04:05,650 --> 00:04:08,270
+A bit of care is needed when building this graph.
+
+76
+00:04:08,270 --> 00:04:12,140
+An edge between two points is weighted by the similarity of the points.
+
+77
+00:04:12,140 --> 00:04:15,320
+A common similarity function is the Gaussian similarity that decays
+
+78
+00:04:15,320 --> 00:04:17,540
+exponentially with a distance.
+
+79
+00:04:17,540 --> 00:04:21,460
+We connect each point to a fixed number of closest neighboring points.
+
+80
+00:04:21,460 --> 00:04:22,530
+How many?
+
+81
+00:04:22,530 --> 00:04:27,110
+Typically it should not be too many, but enough that the resulting graph has no, or
+
+82
+00:04:27,110 --> 00:04:28,310
+very few, disconnected parts.
+
+83
+00:04:29,540 --> 00:04:32,488
+What is the difference on spectral clustering and K-means here?
+
+84
+00:04:32,488 --> 00:04:35,030
+The inter-point distances used by K-means
+
+85
+00:04:35,030 --> 00:04:37,650
+don't capture the complicated shape of the data.
+
+86
+00:04:37,650 --> 00:04:41,270
+In some sense, we don't want to jump across the gaps.
+
+87
+00:04:41,270 --> 00:04:42,638
+A graph captures those gaps.
+
+88
+00:04:42,638 --> 00:04:47,448
+Another interesting point, our Spectral Clustering also uses K-means but
+
+89
+00:04:47,448 --> 00:04:50,260
+with an important difference.
+
+90
+00:04:50,260 --> 00:04:54,490
+We created new feature factors and use K-Means with those new features.
+
+91
+00:04:54,490 --> 00:04:57,198
+Then the clusters follow the inherent tape of the data.
+
+92
+00:04:57,198 --> 00:05:00,530
+In other words,we found them embedding for
+
+93
+00:05:00,530 --> 00:05:03,870
+our data points that captures delayed in structure much better.
+
+94
+00:05:03,870 --> 00:05:07,130
+We've seen embedding with PCA, but this one is different.
+
+95
+00:05:07,130 --> 00:05:11,220
+In PCA the new features are some combination of the existing features,
+
+96
+00:05:11,220 --> 00:05:13,680
+even though we didn't explicitly write it that way.
+
+97
+00:05:13,680 --> 00:05:16,960
+With a graph, there's no such relatively simple relation.
+
+98
+00:05:16,960 --> 00:05:18,530
+Here we have a nonlinear embedding.
+
+99
+00:05:19,660 --> 00:05:20,660
+In summary,
+
+100
+00:05:20,660 --> 00:05:25,290
+by putting everything together we saw how to use the eigenvectors of the Laplacian
+
+101
+00:05:25,290 --> 00:05:28,870
+matrix to find meaningful clusters that respect hidden structure in the data.
+

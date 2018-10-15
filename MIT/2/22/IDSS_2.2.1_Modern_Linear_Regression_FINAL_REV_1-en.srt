@@ -1,0 +1,340 @@
+0
+00:00:00,310 --> 00:00:04,570
+We begin a new block of segments where we consider modern linear regression for
+
+1
+00:00:04,570 --> 00:00:05,620
+high dimensional data.
+
+2
+00:00:05,620 --> 00:00:10,440
+We consider the linear regression model Y equals Beta X plus Epsilon where Beta X
+
+3
+00:00:10,440 --> 00:00:14,210
+is the population best linear predictor, or BLP, of Y using X.
+
+4
+00:00:14,210 --> 00:00:17,040
+Or simply the population linear regression function, and
+
+5
+00:00:17,040 --> 00:00:19,240
+epsilon is uncorrelated with X.
+
+6
+00:00:19,240 --> 00:00:23,428
+Here, the regressor X is p-dimsensional, that is, there are P regressors and
+
+7
+00:00:23,428 --> 00:00:26,930
+the sample size is N, and P is large, possibly larger than N.
+
+8
+00:00:26,930 --> 00:00:30,030
+One reason for having high dimensional regessors in our model
+
+9
+00:00:30,030 --> 00:00:34,300
+is the increasing availability of modern rich data, or quote unquote, big data.
+
+10
+00:00:34,300 --> 00:00:37,560
+Many modern data sets are rich in that they have many recorded features or
+
+11
+00:00:37,560 --> 00:00:38,400
+regressors.
+
+12
+00:00:38,400 --> 00:00:40,080
+For example, in house pricing and
+
+13
+00:00:40,080 --> 00:00:43,780
+appraisal analysis, we can make use of numerous housing characteristics.
+
+14
+00:00:43,780 --> 00:00:46,790
+In demand analysis, we can rely on price and
+
+15
+00:00:46,790 --> 00:00:50,140
+product characteristics, and in the analysis of court decisions,
+
+16
+00:00:50,140 --> 00:00:52,770
+we can employ many of the judges' characteristics.
+
+17
+00:00:52,770 --> 00:00:55,560
+Another reason for having high dimensional regressors in our model
+
+18
+00:00:55,560 --> 00:00:57,178
+is the use of constructed regressors.
+
+19
+00:00:57,178 --> 00:00:59,740
+By this we mean that if Z are raw regressors or
+
+20
+00:00:59,740 --> 00:01:02,160
+features, then the constructed regressors, X,
+
+21
+00:01:02,160 --> 00:01:05,630
+are given by the set of transformations, P(Z), who's components are Pj(Z).
+
+22
+00:01:05,630 --> 00:01:09,910
+We sometimes call this set of transformations a dictionary.
+
+23
+00:01:09,910 --> 00:01:12,530
+For instance, in the wage example, we used quadratic and
+
+24
+00:01:12,530 --> 00:01:15,810
+cubic transformations of experience, as well as interactions, or products,
+
+25
+00:01:15,810 --> 00:01:18,930
+of these regressors with education and geographic indicators.
+
+26
+00:01:18,930 --> 00:01:22,770
+The use of constructed regressors allows us to build more flexible and potentially
+
+27
+00:01:22,770 --> 00:01:26,840
+better prediction rules than just linear rules that employ lower regressors.
+
+28
+00:01:26,840 --> 00:01:30,808
+This is because we're using prediction rules Beta X equals Beta P(Z) that
+
+29
+00:01:30,808 --> 00:01:34,420
+are allowed to be either linear or nonlinear in the raw regressor Z.
+
+30
+00:01:34,420 --> 00:01:37,700
+We now know that we still call the prediction rule Beta X linear
+
+31
+00:01:37,700 --> 00:01:40,500
+because it is linear with respect to the parameters Beta.
+
+32
+00:01:40,500 --> 00:01:44,750
+And with respect to the constructed regressors X equals P(Z).
+
+33
+00:01:44,750 --> 00:01:47,590
+We next ask the following related question.
+
+34
+00:01:47,590 --> 00:01:50,340
+What is the best prediction rule for Y using Z?
+
+35
+00:01:50,340 --> 00:01:52,760
+It turns out that the best prediction rule
+
+36
+00:01:52,760 --> 00:01:55,020
+is the conditional expectation of Y given Z.
+
+37
+00:01:55,020 --> 00:01:57,550
+We denote this prediction rule by g of Z and
+
+38
+00:01:57,550 --> 00:02:00,490
+we call it the regression function of Y on Z.
+
+39
+00:02:00,490 --> 00:02:03,220
+This is the best prediction rule among all rules, and
+
+40
+00:02:03,220 --> 00:02:06,050
+it is generally better than the best linear prediction rule.
+
+41
+00:02:06,050 --> 00:02:09,310
+Indeed, it can be shown that g(Z) solves the best
+
+42
+00:02:09,310 --> 00:02:13,410
+prediction problem where we minimize the mean squared prediction error,
+
+43
+00:02:13,410 --> 00:02:18,090
+or MSE, among all prediction rules m(Z) linear or nonlinear in Z.
+
+44
+00:02:18,090 --> 00:02:22,970
+Now by using beta P(Z) we are implicitly approximating the best predictor g(Z).
+
+45
+00:02:22,970 --> 00:02:28,120
+Indeed, it can be shown for any parameter b shown the MSE for predicting Y with b(Z)
+
+46
+00:02:28,120 --> 00:02:34,130
+was equal to the MSE for approximating G g(Z) with b'P(Z) plus the constant.
+
+47
+00:02:34,130 --> 00:02:37,270
+That is, the mean squared prediction error is equal to the mean squared
+
+48
+00:02:37,270 --> 00:02:40,220
+approximation error plus a constant that doesn't depend on B, so
+
+49
+00:02:40,220 --> 00:02:43,360
+that minimizing the former is the same as minimizing the latter.
+
+50
+00:02:43,360 --> 00:02:47,680
+We now conclude that the BLP beta P(Z) is the best linear approximation, or
+
+51
+00:02:47,680 --> 00:02:49,820
+BLA, to the regression function g(Z).
+
+52
+00:02:49,820 --> 00:02:53,078
+By using a richer and richer dictionary of transformations,
+
+53
+00:02:53,078 --> 00:02:57,360
+P(Z), we can make the BLP beta P(Z) approximate g(Z) better and better.
+
+54
+00:02:57,360 --> 00:03:00,390
+We can illustrate this point by the following simulations.
+
+55
+00:03:00,390 --> 00:03:03,280
+Suppose that is uniformly distributed on the unit interval, and
+
+56
+00:03:03,280 --> 00:03:07,960
+the true regression function g(Z) is the exponential function of 4 times Z.
+
+57
+00:03:07,960 --> 00:03:09,280
+Suppose we don't know this and
+
+58
+00:03:09,280 --> 00:03:13,880
+we use the linear form beta P(Z) to provide approximations for g(Z)?
+
+59
+00:03:13,880 --> 00:03:17,640
+Suppose we use P(Z) that consists of polynomial transformations of Z,
+
+60
+00:03:17,640 --> 00:03:21,100
+consisting of the first P terms of the polynomial series 1,
+
+61
+00:03:21,100 --> 00:03:24,340
+Z, Z squared, Z cubed, and so on.
+
+62
+00:03:24,340 --> 00:03:28,520
+We use this dictionary to form the BLA or BLP beta P(Z).
+
+63
+00:03:28,520 --> 00:03:32,510
+We now provide a sequence of figures that illustrate the approximation properties of
+
+64
+00:03:32,510 --> 00:03:37,550
+the BLA or BLP corresponding to P(Z) equal to 1, 2, 3 and 4.
+
+65
+00:03:37,550 --> 00:03:41,295
+With P equal 1, we get a constant approximation to the regression function
+
+66
+00:03:41,295 --> 00:03:45,550
+g(Z), and as we can see, the quality of this approximation is very poor.
+
+67
+00:03:45,550 --> 00:03:49,210
+With P = 2, we get a linear inside approximation for g(Z), and
+
+68
+00:03:49,210 --> 00:03:52,468
+as the figure shows, the quality of this approximation is still very poor.
+
+69
+00:03:52,468 --> 00:03:57,350
+With P = 3, we get a quadratic in Z approximation for g(Z),
+
+70
+00:03:57,350 --> 00:04:00,200
+and now, the quality is quite good all of a sudden.
+
+71
+00:04:00,200 --> 00:04:03,088
+This explains why using the linear transformations over [INAUDIBLE]
+
+72
+00:04:03,088 --> 00:04:04,530
+regressors is a good idea.
+
+73
+00:04:04,530 --> 00:04:07,866
+Now with P equals 4 we get a cubic in Z approximation for
+
+74
+00:04:07,866 --> 00:04:11,462
+g(Z) and the quality of approximation becomes simply excellent.
+
+75
+00:04:11,462 --> 00:04:14,160
+This further stresses the motivation for
+
+76
+00:04:14,160 --> 00:04:18,790
+using nonlinear transformations Over all regressors in linear regression analysis.
+
+77
+00:04:18,790 --> 00:04:21,060
+In summary, we provided two motivations for
+
+78
+00:04:21,060 --> 00:04:23,490
+using high-dimensional regressors in prediction.
+
+79
+00:04:23,490 --> 00:04:27,780
+The first motivation is that modern data sets have high dimensional features
+
+80
+00:04:27,780 --> 00:04:29,580
+That can be used as regressors.
+
+81
+00:04:29,580 --> 00:04:34,330
+The second motivation is that we can use nonlinear transformations of features or
+
+82
+00:04:34,330 --> 00:04:38,430
+raw regressors and their interactions to form constructed regressors.
+
+83
+00:04:38,430 --> 00:04:42,591
+This allows us to better approximate the ultimate and best prediction rule,
+
+84
+00:04:42,591 --> 00:04:46,250
+the conditional expectation of the outcome given raw regressors.
+

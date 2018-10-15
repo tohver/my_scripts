@@ -1,0 +1,412 @@
+0
+00:00:00,640 --> 00:00:02,932
+In the previous sections we've seen PCAs,
+
+1
+00:00:02,932 --> 00:00:05,550
+spectral embeddings and spectral clustering.
+
+2
+00:00:05,550 --> 00:00:07,790
+All these methods find new feature vectors for
+
+3
+00:00:07,790 --> 00:00:11,220
+the data points, in other words, an embedding.
+
+4
+00:00:11,220 --> 00:00:14,140
+The idea of embeddings is very useful, so
+
+5
+00:00:14,140 --> 00:00:17,102
+let's summarize some different types of embeddings and their uses.
+
+6
+00:00:17,102 --> 00:00:22,070
+With vectors we already saw that different embeddings can look very different.
+
+7
+00:00:23,070 --> 00:00:26,270
+We used embeddings to do dimensionality reduction.
+
+8
+00:00:26,270 --> 00:00:30,040
+We found short feature vectors since finding important information in
+
+9
+00:00:30,040 --> 00:00:33,140
+high dimensions is like finding a needle in a haystack.
+
+10
+00:00:33,140 --> 00:00:37,380
+Our two dimensional embeddings visualize graphs, news, or people's preferences.
+
+11
+00:00:38,490 --> 00:00:41,270
+The new feature vectors bring out major trends, so
+
+12
+00:00:41,270 --> 00:00:43,550
+it's easier to apply other methods.
+
+13
+00:00:43,550 --> 00:00:44,745
+In spectral clustering,
+
+14
+00:00:44,745 --> 00:00:48,750
+k-means give better clustering after spectral embedding.
+
+15
+00:00:48,750 --> 00:00:51,450
+It's very easy to separate the clusters now.
+
+16
+00:00:51,450 --> 00:00:56,910
+And embeddings can give us important components or themes, as with PCA.
+
+17
+00:00:56,910 --> 00:01:01,350
+This points to a difference between the spectrograph embeddings and PCA.
+
+18
+00:01:01,350 --> 00:01:02,310
+In PCA,
+
+19
+00:01:02,310 --> 00:01:05,500
+each data point could be written as a weighted combination of the components.
+
+20
+00:01:06,640 --> 00:01:08,860
+Such embeddings are called linear.
+
+21
+00:01:08,860 --> 00:01:14,030
+In spectral clustering, we first construct a graph and then point eigenvectors.
+
+22
+00:01:14,030 --> 00:01:18,890
+Even if we start our feature vectors, our new representation is not linear.
+
+23
+00:01:18,890 --> 00:01:21,330
+Such embeddings are non linear.
+
+24
+00:01:21,330 --> 00:01:26,130
+The different types of embeddings are guided by different goals and criteria.
+
+25
+00:01:26,130 --> 00:01:30,134
+In spectral clustering all of you knew their pairs similarity relationships,
+
+26
+00:01:30,134 --> 00:01:33,481
+like friendships in the social network or the related articles for
+
+27
+00:01:33,481 --> 00:01:35,990
+given use article in a collection.
+
+28
+00:01:35,990 --> 00:01:39,550
+Our goal is to find a vector representation that maintains these local
+
+29
+00:01:39,550 --> 00:01:42,820
+relationships and puts related coins close to each other.
+
+30
+00:01:42,820 --> 00:01:44,280
+This is for in our visualizations.
+
+31
+00:01:45,480 --> 00:01:49,910
+This goal of low dimensional features that preserve some pairs as relationships
+
+32
+00:01:49,910 --> 00:01:51,710
+is shared by other methods.
+
+33
+00:01:51,710 --> 00:01:52,590
+For example,
+
+34
+00:01:52,590 --> 00:01:56,520
+sometimes we have site information available to guide the embeddings.
+
+35
+00:01:56,520 --> 00:01:59,400
+Say, we have images of handwritten digits and
+
+36
+00:01:59,400 --> 00:02:02,310
+we know the correct digits for some of them.
+
+37
+00:02:02,310 --> 00:02:05,720
+We'd like an embedding that places all two's together, all three's together and
+
+38
+00:02:05,720 --> 00:02:06,800
+so on.
+
+39
+00:02:06,800 --> 00:02:10,600
+We can guide our embedding by giving it example pairs that should be close
+
+40
+00:02:10,600 --> 00:02:13,076
+because we know they are the same digit and
+
+41
+00:02:13,076 --> 00:02:16,780
+example pairs that should not be close because those images are different digits.
+
+42
+00:02:17,940 --> 00:02:21,460
+Apart from that we to preserve local relationships.
+
+43
+00:02:21,460 --> 00:02:25,190
+Metric Learning is a method that takes outside information
+
+44
+00:02:25,190 --> 00:02:26,045
+to guide the embedding.
+
+45
+00:02:27,090 --> 00:02:31,194
+In methods like PCA we are not directly looking for a clustering, but for
+
+46
+00:02:31,194 --> 00:02:33,146
+prominent patterns in our data and
+
+47
+00:02:33,146 --> 00:02:37,330
+each data point may be associated with more than one pattern.
+
+48
+00:02:37,330 --> 00:02:40,150
+The idea of finding prevalent patterns, components,
+
+49
+00:02:40,150 --> 00:02:42,567
+topics or themes appears in several other methods.
+
+50
+00:02:43,670 --> 00:02:45,690
+Independent component analysis or
+
+51
+00:02:45,690 --> 00:02:49,110
+ICA recovers components that are statistically independent.
+
+52
+00:02:49,110 --> 00:02:52,200
+That is, they have no information about of each other.
+
+53
+00:02:52,200 --> 00:02:55,820
+This is stronger than the difference between the PCA components.
+
+54
+00:02:55,820 --> 00:02:59,840
+Think of a microphone that records an overlay of noise from a dishwasher,
+
+55
+00:02:59,840 --> 00:03:02,620
+a barking dog, and people speaking.
+
+56
+00:03:02,620 --> 00:03:05,385
+ICA can be used to recover all these different sources of sounds.
+
+57
+00:03:06,815 --> 00:03:11,555
+Dictionary Learning poses constraints on the data point associations.
+
+58
+00:03:11,555 --> 00:03:15,285
+Each data point maybe associated with only very few components.
+
+59
+00:03:15,285 --> 00:03:19,945
+In this case, we may need many components so we may not reduce the dimentionality
+
+60
+00:03:19,945 --> 00:03:22,335
+but, we obtain a dictionary that can be used for
+
+61
+00:03:22,335 --> 00:03:24,705
+example, to reconstruct corrupt images.
+
+62
+00:03:25,800 --> 00:03:30,080
+Let's go into a bit more detail for one of the methods that is closely related to
+
+63
+00:03:30,080 --> 00:03:33,690
+PCA, Singular Value Decomposition or SVD.
+
+64
+00:03:33,690 --> 00:03:37,120
+In fact, it also gives us the principal components.
+
+65
+00:03:37,120 --> 00:03:41,530
+Recall our PCA example, our friends' ratings of holiday places.
+
+66
+00:03:41,530 --> 00:03:46,640
+Each row in our data matrix corresponds to one person and each column to a place.
+
+67
+00:03:46,640 --> 00:03:50,480
+Each principal component is a pattern like adventure or mountains.
+
+68
+00:03:50,480 --> 00:03:53,292
+And associate is the places with those patterns.
+
+69
+00:03:53,292 --> 00:03:57,560
+SVD will give us a associations of both places and people for each pattern.
+
+70
+00:03:58,680 --> 00:03:59,930
+How does it work?
+
+71
+00:03:59,930 --> 00:04:01,690
+We take our data matrix and as for
+
+72
+00:04:01,690 --> 00:04:05,790
+PCA, subtract the means, this gives us a matrix X.
+
+73
+00:04:05,790 --> 00:04:09,440
+The covariance matrix in PCA is X times X transposed.
+
+74
+00:04:09,440 --> 00:04:11,100
+Right here we keep X.
+
+75
+00:04:11,100 --> 00:04:14,110
+The singular value decomposition writes our data matrix
+
+76
+00:04:14,110 --> 00:04:16,480
+X as a product of three matrixes.
+
+77
+00:04:16,480 --> 00:04:19,450
+These are usually called U, Sigma and V transpose.
+
+78
+00:04:20,590 --> 00:04:23,720
+The matrix sigma is zero, except for the diagonal.
+
+79
+00:04:23,720 --> 00:04:28,640
+The squares of the diagonal entries in sigma's are values we get in PCA.
+
+80
+00:04:28,640 --> 00:04:33,200
+The roles of V principals are the same as the eigenvectors in PCA.
+
+81
+00:04:33,200 --> 00:04:35,890
+These are called the right singular vectors.
+
+82
+00:04:35,890 --> 00:04:38,160
+The columns of the matrix are the left singular vectors.
+
+83
+00:04:39,360 --> 00:04:42,670
+These three matrices describe our data via themes.
+
+84
+00:04:42,670 --> 00:04:47,190
+For each theme we have a singular value, and a left and right singular vector.
+
+85
+00:04:47,190 --> 00:04:50,130
+The singular value tells the importance of the theme.
+
+86
+00:04:50,130 --> 00:04:51,960
+Higher is more important.
+
+87
+00:04:51,960 --> 00:04:56,150
+The right singular vector shows the association of each place with a theme.
+
+88
+00:04:56,150 --> 00:05:00,945
+Recall, scuba diving was associated with a adventure, but not mountains.
+
+89
+00:05:00,945 --> 00:05:05,145
+The corresponding left singular vector tells the preference of each person for
+
+90
+00:05:05,145 --> 00:05:06,255
+the particular pattern.
+
+91
+00:05:06,255 --> 00:05:10,055
+So we can simultaneously understand the likings of people and
+
+92
+00:05:10,055 --> 00:05:12,395
+the characteristics of the places.
+
+93
+00:05:12,395 --> 00:05:16,825
+The entries in the left vectors multiplied by the respective singular values
+
+94
+00:05:16,825 --> 00:05:19,475
+are exactly the coordinates we use to visualize the data.
+
+95
+00:05:20,640 --> 00:05:24,970
+The same kind of analysis is useful when the rows of our data are customers and
+
+96
+00:05:24,970 --> 00:05:26,720
+the columns are products.
+
+97
+00:05:26,720 --> 00:05:30,440
+Or if we describe drug interactions, the rows may be drugs and
+
+98
+00:05:30,440 --> 00:05:33,640
+the columns are proteins or pathways in the body.
+
+99
+00:05:33,640 --> 00:05:35,510
+So let's summarize.
+
+100
+00:05:35,510 --> 00:05:38,470
+Embeddings give us meaningful dimensionality reductions,
+
+101
+00:05:38,470 --> 00:05:40,740
+bring out hidden clusters in the data, and
+
+102
+00:05:40,740 --> 00:05:44,190
+help us understand the data via major patterns, components or themes.
+
